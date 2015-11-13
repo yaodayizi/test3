@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/ssp_new/themes/default/css/reset.css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <style type="text/css">
+    body {
+        background: #ffffff;
+        font-family: Î¢ÈíÑÅºÚ;
+    }
+    
+    .content {
+        width: 931px;
+        margin-top:100px;
+    }
+    
+    .index {
+        width: 36px;
+        margin-left: 30px;
+        padding: 6px 0;
+        border: 1px solid #ccc;
+        border-radius: 15px;
+        position: absolute;
+        transition: top 500ms;
+    }
+    
+    .index a {
+        width: 28px;
+        height: 28px;
+        margin-left: 5px;
+        margin-bottom: 2px;
+        line-height: 28px;
+        font-size: 13px;
+        display: block;
+        text-align: center;
+    }
+    
+    .index a:hover {
+        color: #fff;
+        text-decoration: none;
+        border-radius: 50%;
+        background: #60bde9;
+    }
+    
+    .pop-main {
+        width: 815px;
+        float: right;
+        margin-right: 28px;
+    }
+    
+    .pop-main i {
+        font-style: normal;
+    }
+    
+    .pop-main a {
+        font-size: 14px;
+        text-decoration: none;
+        padding-left:5px;
+    }
+    
+    .pop-main>li>a {
+        padding-left: 14px;
+        font-weight: bold;
+        line-height: 24px;
+        display: block;
+        background: #E3E3E3;
+    }
+    
+    .list-site .count {
+        color: #009ae3;
+    }
+    
+    .list-site li {
+        line-height: 35px;
+    }
+    
+    .list-site > li >label {
+        padding-left: 7px;
+        float:none;
+    }
+    
+    .list-site > li > label,
+    .list-channel > li > label {
+        display: block;
+        cursor: pointer;
+        border-bottom: 1px solid #dcdcdc;
+         float:none;
+    }
+    
+    .list-channel > li {}
+    
+    .list-channel > li > label {
+        padding-left: 34px;
+        border-bottom: 1px dashed #dcdcdc;
+         float:none;
+    }
+    .list-adPlace {
+        padding-left: 65px;
+        overflow: hidden;
+    }
+    .list-adPlace a {
+        font-size: 12px;
+    }
+    .list-adPlace a.stop{
+        color:#c6c6c6;
+    }
+    
+    .list-adPlace .count {
+        color: #60ba42;
+    }
+    
+
+    .list-adPlace li{
+        min-width:200px;
+        float:left;
+    }
+    
+    .chk-select {
+        width: 13px;
+        height: 13px;
+        display: inline-block;
+        background: url(images/chk_select.png) no-repeat;
+        cursor: pointer;
+    }
+    
+    .chk-half {
+        width: 13px;
+        height: 13px;
+        display: inline-block;
+        background: url(images/chk_half.png);
+        cursor: pointer;
+    }
+    
+    .chk-not {
+        width: 13px;
+        height: 13px;
+        display: inline-block;
+        background: url(images/chk_not.png);
+        cursor: pointer;
+    }
+
+
+    </style>
+
+    <script type="text/javascript" src="/ssp_new/assets/c473a780/jquery.js"></script>
+    <script type="text/javascript" src="/ssp_new/js/libs/knockout-2.2.1.js"></script>
+     <script type="text/javascript" src="/ssp_new/js/libs/knockout.mapping.min.js"></script>
+     <script type="text/javascript" src="/ssp_new/js/plugins/jquery.scrollTo.js"></script>
+     <script type="text/javascript" src="sell_data2.js"></script>
+</head>
+
+<body>
+
+    <div id="content" class="content" style="height:500px;overflow:auto">
+        <ul id="pop-main" class="pop-main" data-bind="foreach:adPlaceModel">
+            <li>
+                <a href="javascript:void(0)"  data-bind="text:index().toUpperCase(),attr:{index:$index,name:index,id:'char_index_'+index()}" ></a>
+                <ul class="list-site" data-bind="foreach:items">
+                    <li>
+                        <label>
+                            <i  data-bind="click:adPlaceModel.selectedAll,attr:{index:$parentContext.$index()+'_'+$index(),class:chkClass()}"></i><a data-bind="click:adPlaceModel.selectedAll,text:label,attr:{id:id,index:$parentContext.$index()+'_'+$index()}" ></a><span>( <em class="count" data-bind="text:selectedCount">count</em>/<i data-bind="text:adPlaceLength">21</i> )</span>
+                        </label>
+                        <ul class="list-channel" data-bind="foreach:children">
+                            <li>
+                                <label>
+                                    <i  data-bind="click:adPlaceModel.selectedAll,attr:{class:chkClass(),index:$parentContext.$parentContext.$index()+'_'+$parentContext.$index()+'_'+$index()}"></i><a data-bind="click:adPlaceModel.selectedAll,text:label,attr:{id:id,index:$parentContext.$parentContext.$index()+'_'+$parentContext.$index()+'_'+$index()}"> </a><span>( <em class="count" data-bind="text:selectedCount">9</em>/<i  data-bind="text:adPlaceLength">9</i> )</span>
+                                </label>
+                                <ul class="list-adPlace" data-bind="foreach:children">
+                                    <li>
+                                        <label><i   data-bind="attr:{index:$parentContext.$parentContext.$parentContext.$index()+'_'+$parentContext.$parentContext.$index()+'_'+$parentContext.$index()+'_'+$index(),class:selected() ? 'chk-select' : 'chk-not',
+                                        },                                        
+                                        click:adPlaceModel.adPlaceClick"></i><a href="javascript:void(0)" 
+                                        data-bind="text:label,
+                                        attr:{id:id,
+                                        index:$parentContext.$parentContext.$parentContext.$index()+'_'+$parentContext.$parentContext.$index()+'_'+$parentContext.$index()+'_'+$index()
+                                        },
+                                        click:adPlaceModel.adPlaceClick,
+                                        css:{stop:state()=='0'}
+                                        "> </a><span>( <em class="count" data-bind="text:adPlaceModel.totalFormat(total())">500W</em> )</span></label>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="index-container" style="position:relative">
+        <div class="index"  id='pop-index' data-bind="foreach:adPlaceModel">
+            <a href="javascript:void(0)" data-bind="text:index().toUpperCase(),attr:{target:index},click:adPlaceModel.indexClick">A</a>
+        </div>
+        </div>
+    </div>
+<script>
+var adPlaceModel = sellData;
+mm=0;
+site=0;
+ch=0;
+
+$(adPlaceModel).each(function(){
+    
+    $(this.items).each(function(){
+        site++;
+        this.chkClass='chk-not';
+        //this.selected = false;
+        this.selectedCount = 0;
+        this.adPlaceLength = 0;
+        $(this.children).each(function(){
+            ch++;
+            this.chkClass='chk-not';
+            //this.selected=false;
+            this.selectedCount = 0;
+            this.adPlaceLength = 0;
+/*            $(this.children).each(function(){
+                mm++;
+            })*/
+        });
+    })
+
+});
+/*console.log('site='+site);
+console.log('ch='+ch);
+console.log('placeCount='+mm);*/
+adPlaceModel = ko.mapping.fromJS(adPlaceModel);
+
+
+adPlaceModel.adPlaceClick = function(data,e)
+{
+    //console.log($(e.target).attr('siteIndex'));
+    data.selected() ? data.selected(false) : data.selected(true);
+    adPlaceModel.setParentChkState(e.target.getAttribute('index'));
+
+}
+
+adPlaceModel.getSiblings = function(indexStr)
+{
+    var indexArr=indexStr.split('_');
+
+    var items = adPlaceModel()[indexArr[0]].items();
+    var parent;
+    var siblings = items;
+
+    for(var i=1;i<indexArr.length;i++)
+    {
+        var tmpObj = siblings[indexArr[i]];
+        if(tmpObj.hasOwnProperty('children'))
+        {
+            parent=siblings[indexArr[i]];
+            siblings = siblings[indexArr[i]].children();
+
+        }
+    }
+    return {parent:parent,siblings:siblings,indexArr:indexArr};
+}
+
+adPlaceModel.setParentChkState = function(indexStr)
+{
+
+    console.log(indexStr);
+    var items = adPlaceModel.getSiblings(indexStr);
+
+    if(!items.parent) return;
+
+    var len = items.siblings.length , half=false;selectedCount =0 , chkState='chk-half', adPlaceSelectedCount=0 ,adPlaceLength=0;
+
+    for(var i=0;i<len;i++)
+    {
+        if(items.siblings[i].hasOwnProperty('selected'))
+        { 
+            if(items.siblings[i].selected())
+            {
+                selectedCount++;
+            }
+        }
+        else
+        {
+            if(items.siblings[i].chkClass() == 'chk-select')
+            {
+                selectedCount++
+            }
+            if(items.siblings[i].chkClass()  == 'chk-half')
+            {
+                half = true;
+            }
+        }
+
+
+        if(items.siblings[i].hasOwnProperty('selectedCount'))
+        {
+
+            adPlaceSelectedCount+=items.siblings[i].selectedCount();   
+            adPlaceLength+=items.siblings[i].children().length;
+
+        }
+        else
+        {
+            adPlaceSelectedCount=selectedCount;
+            adPlaceLength++
+        }
+        
+    }
+
+    if(selectedCount == len )
+    {
+        chkState = 'chk-select';
+    }
+    else if(selectedCount==0 && !half)
+    {
+        chkState = 'chk-not';
+    }
+    
+    //items.parent.selected(true);
+    items.parent.chkClass(chkState);
+    items.parent.selectedCount(adPlaceSelectedCount);
+    items.parent.adPlaceLength(adPlaceLength);
+    items.indexArr.splice(items.indexArr.length-1,1);
+    if(items.indexArr.length>1)   adPlaceModel.setParentChkState(items.indexArr.join('_'));
+}
+
+adPlaceModel.getCurrent = function(indexStr)
+{
+    var indexArr=indexStr.split('_');
+    var items = adPlaceModel()[indexArr[0]].items();
+    var children =items;
+    var current;
+    for(var i=1;i<indexArr.length;i++)
+    {
+        if(children[indexArr[i]].hasOwnProperty('children'))
+        {
+            current = children[indexArr[i]];
+            children = children[indexArr[i]].children();
+            
+        }
+
+    }
+    return {children:children,current:current};
+}
+
+adPlaceModel.selectedAll = function(data,e)
+{
+    var indexStr = e.target.getAttribute('index')
+    var current = adPlaceModel.getCurrent(indexStr);
+    var nextState='';
+    switch(current.current.chkClass())
+    {
+        case 'chk-not':
+            nextState = 'chk-select';
+            break;
+        case 'chk-half':
+            nextState = 'chk-not';
+            break;
+        case 'chk-select':
+            nextState = 'chk-not';
+            break;
+        default:
+            nextState = 'chk-half';
+            break;
+    }
+    current.nextState = nextState;
+    adPlaceModel.selectedAllChildren(current);
+    adPlaceModel.setParentChkState(indexStr);
+
+}
+
+
+
+adPlaceModel.selectedAllChildren = function(current)
+{
+
+    var len=current.children.length;count=0;
+    var count = 0;
+    for(var i=0;i<len;i++)
+    {
+       
+        if(current.children[i].hasOwnProperty('children'))
+        {
+            count = current.nextState == 'chk-not' ? 0 : current.children[i].children().length;
+            adPlaceModel.selectedAllChildren({children:current.children[i].children(),nextState:current.nextState});
+            current.children[i].selectedCount(count);
+            current.children[i].chkClass(current.nextState);
+        }
+        else
+        {
+             var isSelected = current.nextState == 'chk-select' ? true : false;
+             current.children[i].selected(isSelected) ;
+        }
+     }
+
+     if(current.hasOwnProperty('current'))
+     {
+        count = current.nextState == 'chk-not' ? 0 : len;
+        current.current.selectedCount(count);
+        current.current.chkClass(current.nextState);
+    }
+}
+adPlaceModel.totalFormat = function(total)
+{
+    if(total>10000)
+    {
+        return (total/10000).toFixed(2)+'W';
+    }
+    else if(total > 1000)
+    {
+        return (total/1000).toFixed(2)+'K';
+    }
+
+}
+adPlaceModel.indexClick=function(data,e)
+{
+    //console.log(data);
+    var target = data.index();
+    $('#content').scrollTo('#char_index_'+target,500);
+    var top = $('#char_index_'+target).offset();
+    $('#pop-index').css({top:top})
+}
+
+
+$(document).ready(function(){
+    ko.applyBindings(adPlaceModel);
+    //adPlaceModel.setParentChkState('0_0_0')
+$(adPlaceModel()).each(function(index){
+    var charIndex = index;
+    $(this.items()).each(function(index){
+         var siteIndex=index;
+
+        $(this.children()).each(function(index){
+            var channelIndex = index;
+            if(this.children().length>0)
+            {
+                adPlaceModel.setParentChkState(charIndex+'_'+siteIndex+'_'+channelIndex+'_0');
+            }
+/*            $(this.children).each(function(){
+                mm++;
+            })*/
+        });
+    })
+
+});
+    //console.log('aaa');
+})
+</script>
+</body>
+
+</html>

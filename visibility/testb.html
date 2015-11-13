@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<style>
+.el{
+	width:300px;
+	height: 250px;
+	background:red;
+	border:1px solid;
+	position: relative;
+}
+.el2{
+	position: absolute;
+	width:1px;
+	height: 1px;
+	background: #ccc;
+	border: 1px solid;
+	top:10px;
+	left:0px;
+}
+</style>
+<script type="text/javascript" src="/ssp_new/assets/c473a780/jquery.js"></script>
+</head>
+<body>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="el" id="el">
+
+	<img  id="img1" src="images/transparent.gif" data-src="aaa.png"/>
+	<span id="span1">sss</span>
+	<label id="lb1"></label>
+	<button onclick="out()">out</button>
+</div>
+<div id="el2" class="el2">
+
+</div>
+
+<script>
+
+	var lb1 = document.getElementById('lb1');
+	var img1 = document.getElementById('img1');
+	var el = document.getElementById('el')
+	var obj = {};
+	
+/*	setInterval(function(){
+		var lb1Rect = el.getBoundingClientRect();
+		if(obj.top!=lb1Rect.top)
+		{
+			obj =lb1Rect;
+			console.log(obj);
+		}
+	},1000)*/
+	//console.log(img1.scrollintoview())
+	function out(){
+	console.log(window.screenX,window.screenY);
+	console.log(window.innerWidth,window.innerHeight)
+	console.log(window.pageXOffset,window.pageYOffset)
+	console.log(screen.availWidth,screen.availHeight)
+	console.log(document.getElementById('img1').getBoundingClientRect())
+	console.log(parent);
+	}
+
+	for(var i=0;i<1000;i++)
+	{
+		var $item = $('<div class="el2" id="el2'+i+'" ></div>');
+		$item.attr('speedx',1);
+		$item.attr('speedy',1);
+		$item.css('top',Math.random()*10);
+		$item.css('left',Math.random()*10);
+		$(el).append($item);
+	}
+
+	var $el2 = $('#el2');
+	var time =0;
+	var fps=0;	
+	var time = new Date().getTime();	
+	var count =0;0
+
+	function draw(){
+
+		for(var i=0;i<1000;i++)
+		{
+			var $item = $('#el2'+i);
+			var speedX = parseInt($item.attr('speedx'));
+			var speedY = parseInt($item.attr('speedy'));
+			var left = parseInt($item.css('left'));
+			var top = parseInt($item.css('top'));
+
+			if(left>=10)
+			{
+				speedX = -speedX
+				$item.css('left',0)
+			}
+			if(left<=0)
+			{
+				speedX = Math.abs(speedX)
+			}
+
+
+			$item.css('left',left+speedX);
+
+			if(top>=10)
+			{
+				speedY = -speedY;
+
+			}
+
+			if(top<=0)
+			{
+				speedY = Math.abs(speedY)
+			}
+
+			$item.css('top',top+speedY);
+			$item.attr('speedx',speedX);
+			$item.attr('speedy',speedY);
+
+
+		}
+
+		var date = new Date();
+		 
+		interval = date.getTime() -time;
+
+
+
+		fps++;
+		if(interval > 1000)
+		{
+			console.log(count+','+fps);
+			time = date.getTime();
+			fps = 0;
+			count++;
+		}
+
+		requestAnimationFrame(draw);
+		
+	}
+	function render()
+	{
+		//setInterval(draw,16);
+		requestAnimationFrame(draw);
+	}
+
+	render();
+
+</script>
+</body>
+</html>

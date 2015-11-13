@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Viewable Test Demo</title>
+	<style>
+	.viewable_ad{
+		position: relative;
+		width: 500px;
+		height: 390px;
+		background-color: #999;
+	}
+	.viewable_ad .test_sprite{
+		position: absolute;
+		width: 20px;
+		height:  20px;
+	}
+	</style>
+	<script>
+( function(CanvasWidth, CanvasHeight){
+	var SpriteSize = 20;
+
+	var ViewableTest = function(canvas){
+		this.canvas = canvas;
+		this.count = 0;
+		this.startTime = 0;
+		this.nowTime = 0;
+		this.requestAnimationFrameId = 0;
+	}; 
+	
+	ViewableTest.prototype.DRAWRECTTIMES = 200; 
+
+	ViewableTest.prototype.start = function (){
+		if( this.requestAnimationFrameId ){
+			window.cancelAnimationFrame(this.requestAnimationFrameId);
+			this.requestAnimationFrameId = 0;
+		}
+		this.count = 0;
+		this.startTime = this.nowTime = performance.now();
+		this.requestAnimationFrameId = window.requestAnimationFrame(this.testing.bind(this));
+	};
+	
+	ViewableTest.prototype.testing = function(timestamp){
+		var ctx = this.canvas.getContext('2d'), left, top;
+		for( var i = 1; i <= this.DRAWRECTTIMES; i++ ){
+			ctx.clearRect(0, 0, SpriteSize, SpriteSize);
+			ctx.fillStyle="black"; 
+
+			left = Math.floor(Math.random() * SpriteSize);
+			top = Math.floor(Math.random() * SpriteSize);
+
+			ctx.fillRect(left, top, SpriteSize , SpriteSize );
+			
+		}
+
+		this.count++;
+		this.nowTime = performance.now(); 
+		this.requestAnimationFrameId = window.requestAnimationFrame(this.testing.bind(this));
+	};
+
+	ViewableTest.prototype.getFPS = function(){
+		if( this.requestAnimationFrameId ){
+			window.cancelAnimationFrame(this.requestAnimationFrameId);
+			this.requestAnimationFrameId = 0;
+		} 
+		//console.log( this.count, this.nowTime, this.startTime );
+		return this.nowTime - this.startTime == 0 ? 0 : Math.floor( (this.count * 1000) / (this.nowTime - this.startTime ));
+	};
+
+	var Sprites = [];
+
+	var startSpritesListening = function (){
+		var sprite;
+		for( var i = 0 ; i < Sprites.length; i++ ){
+			sprite = Sprites[i];
+			sprite.start();
+		}
+		setTimeout( retrieveLastestValues, 1000 );
+	};
+
+	var retrieveLastestValues = function (){
+		var sprite, fps = [];
+		for( var i = 0 ; i < Sprites.length; i++ ){
+			sprite = Sprites[i];
+			fps.push(sprite.getFPS());
+		}
+		console.log(fps.join(','));
+	};
+
+	window.onload = function (){
+		var container = document.getElementById('test');
+		
+		var SpritesCount = 10;
+		var sprite;
+
+		for( var i = 1; i <= SpritesCount; i++ ){
+			sprite = document.createElement("canvas");
+			sprite.className = "test_sprite";
+			sprite.style.left = ( i * 30 + 20 ) + 'px';
+			sprite.style.top = ( i * 30 + 10 ) + 'px';
+			container.appendChild( sprite );
+			Sprites[i-1] = new ViewableTest(sprite);
+		}
+		setTimeout( function(){
+			setInterval(startSpritesListening, 1200 ); 
+		}, 500);
+
+	};
+
+
+})(500,390);
+
+
+	</script>
+	</head>
+	<body>
+	<div style="margin: 200px 0;"> Top Padding... </div>
+	<div id="test" class="viewable_ad"></div>
+	<div style="margin: 200px 0;"> Bottom Padding... </div>
+	</body>
+</html>

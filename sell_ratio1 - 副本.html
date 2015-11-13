@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/ssp_new/themes/default/css/reset.css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+    body{
+    	background: #fff;
+    	padding: 20px;
+    }
+	.ratio{
+		width:600px;
+	}
+
+	.ratio h3{
+		font-size:15px;
+		line-height: 30px;
+		background: url(images/hook.png) no-repeat  100px 8px;
+		padding-left:130px;
+		cursor:pointer;
+	}
+
+	.ratio ul{
+		width:300px;
+	}
+	.ratio li{
+		width: 68px;
+		height: 68px;
+		text-align: center;
+		border:1px solid #ccc;
+		float:left;
+
+	}
+
+
+	.ratio li h5{
+		margin-top:18px;
+	}
+
+	.ratio li .selectItem{
+		float: right;
+		width:68px;
+		height: 18px;
+		display: block;
+		background-image: url(images/ratio.png);
+		background-repeat: no-repeat;
+		background-position: top right;
+		cursor:pointer;
+	}
+
+	.ratio li .selected{
+		background-image: url(images/ratio_selected.png);
+	}
+	.ratio li input{
+		/*  display: none;  */
+	}
+
+	.ratio li .edit{
+		
+	}
+	
+	.ratio .item
+	{
+		float:left;
+	}
+
+	.ratio .show{
+		display:inherit;
+	}
+
+	.ratio .hide{
+		display: none;
+	}
+
+	
+    </style>
+    
+
+    <script type="text/javascript" src="/ssp_new/assets/c473a780/jquery.js"></script>
+    <script type="text/javascript" src="/ssp_new/js/libs/knockout-2.2.1.js"></script>
+     <script type="text/javascript" src="/ssp_new/js/libs/knockout.mapping.min.js"></script>
+     <script src="seller_ratio.js"></script>
+
+</head>
+
+<body>
+<script type="text/tpl" name="abc">
+	<div class="header"><span data-bind="text: year"></span></div>
+	<div class="body">
+		<ul data-bind="foreach: months">
+			<li data-bind="text: $root.ratioItems[$index()]"></li>
+		</ul>
+	</div>
+</script>
+
+<div id="ratio" class="ratio">
+	<div class="date-container"  data-bind="foreach:_ratioModel.data">
+		<div class="item" >
+			
+ 			<h3 data-bind="text:year()+'年',click:$root.selectAll" >2015年</h3>
+			<ul data-bind="foreach:children">
+				<li class="month" data-bind=""> 
+				<span class="selectItem"   data-bind="click:$root.itemClick,css:{selected:selected()}"></span>
+				<h5  data-bind="text:month().substr(month().length-1,1)+'月'"></h5>
+					<div><b data-bind="text:value,css:{hide:state() == 1},click:$root.editing ">100</b>
+						<input type="text" value="100" data-bind="value:val,valueUpdate: ['afterkeydown'],css:{hide:state() ==0},event:{blur:$root.itemInputBlur}" />
+					 %</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div >
+	<label>批量设置 :</label> <input type="text" value="0" length="5" maxlength="3" data-bind="value:$root.batchInputSet,valueUpdate: ['afterkeydown']"/> <input type="button" data-bind="click:batchButtonClick" value="提交"/>
+
+	</div>
+</div>
+ <!--
+<input type="checkbox"  data-bind="value: month, checked: $root.bacthSelectedArray"/>
+-->
+
+<script>
+
+var _ratioModel={};
+
+var _mapping = {
+	create:function(options){
+			var parent = new _parent(options.data);
+			parent.selected = ko.observable(false);
+			return parent;
+		
+	},
+	'children':{
+		create:function(options){
+
+			return new _childModel(options.data);
+		}
+	},
+
+
+}
+
+var _parent = function(data)
+{
+	ko.mapping.fromJS(data, _mapping, this);
+}
+var _childModel = function(data)
+{
+		ko.mapping.fromJS(data, {}, this);
+		this.val = ko.computed({
+			read:function(){
+				return this.value();	
+			},
+			write:function(value){
+				var num = isNaN(parseInt(value, 10)) ? this.value() :parseInt(value, 10);
+				num = num > 100 ? 100 : num;
+				this.value(value);
+				this.value(num);
+
+			},
+			owner: this
+		});
+
+		this.selected = ko.observable(false);
+		this.state = ko.observable(0);
+}
+
+
+
+_ratioModel.data = ko.mapping.fromJS(data,_mapping);
+
+/*_ratioModel.batchInput = {
+	val:ko.observable(0),
+	enabled:ko.observable(false)
+};*/
+_ratioModel.click=0;
+_ratioModel.clickTimeoutID=0;
+_ratioModel.batchInputVal = ko.observable(0);
+_ratioModel.batchInputSet = ko.computed({
+	read:function(){
+		console.log(this.batchInputVal(),'read');
+		return this.batchInputVal();
+	},
+	write:function(value){
+		
+		var num = isNaN(parseInt(value, 10)) ? this.batchInputVal() :parseInt(value, 10);
+		num = num > 100 ? 100 : num;
+		this.batchInputVal(value);
+		this.batchInputVal(num);
+		console.log(num,'write');
+	},
+	owner:_ratioModel
+});
+
+_ratioModel.itemClick = function(data,e)
+{
+			console.log('itemClick');
+			if(data.state()==1){
+				return;
+			}
+			clearTimeout(_ratioModel.clickTimeoutID);
+			_ratioModel.clickTimeoutID=setTimeout(function(){
+				console.log('click',data.month);
+				if(data.selected())
+				{
+					data.selected(false);
+					_ratioModel.bacthSelectedArray.remove(data);
+				}
+				else
+				{
+					data.selected(true);
+					_ratioModel.bacthSelectedArray.push(data);
+				}},300);
+
+			_ratioModel.click =0;
+	
+
+	//data.selected() ? data.selected(false) : data.selected(true);
+
+}
+
+_ratioModel.itemInputBlur = function(data,e)
+{	
+	data.state(0);
+	console.log('blur',data,e);
+}
+
+
+_ratioModel.editing=function(data,e)
+{
+	console.log('editing',data.month);
+	clearTimeout(_ratioModel.clickTimeoutID);
+	data.state(1);
+	//e.preventDefault();
+}
+
+_ratioModel.batchButtonClick = function(data,e)
+{
+	var arr = _ratioModel.bacthSelectedArray();
+	var len = arr.length;
+	for(var i=0;i<len;i++)
+	{
+
+		arr[i].value(_ratioModel.batchInputVal());
+		arr[i].selected(false);
+	}
+	_ratioModel.bacthSelectedArray.removeAll();
+}
+
+
+_ratioModel.selectAll = function(data,e)
+{
+
+	//console.log('clickAll',this,data);
+	//var years = _ratioModel.data[]
+	var selectedVal = data.selected() ? false : true;
+	data.selected(selectedVal);
+	var children = data.children();
+	var len = children.length;
+	for(var i=0;i<len;i++)
+	{
+		children[i].selected(selectedVal);
+		selectedVal ? _ratioModel.bacthSelectedArray.push(children[i]) : _ratioModel.bacthSelectedArray.remove(children[i]);
+	}
+
+}
+
+
+
+_ratioModel.bacthSelectedArray = ko.observableArray();
+
+
+
+/*_ratioModel.input = ko.observable();
+
+_ratioModel.input.subscribe( function (v){
+	var currentMonth = _ratioModel.currentInputMonth();
+	if(validValue(v) && _valueOfMonth(currentMonth) != v ){
+		// Modify current month ratio.
+	}
+});
+
+_ratioModel.currentInputMonth = ko.observable();
+
+_ratioModel.currentInputMonth.subscribe( function (v){
+	var valueOfMonth = _valueOfMonth(v);
+	_ratioModel.input(valueOfMonth);
+});
+*/
+
+
+// console.log(_ratioModel);
+ko.applyBindings(_ratioModel);
+
+
+
+</script>
+</body>
+</html>

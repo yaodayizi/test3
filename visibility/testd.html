@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<style>
+.el{
+	width:300px;
+	height: 250px;
+	background:red;
+	border:1px solid;
+	position: relative;
+}
+.el2{
+	position: absolute;
+	width:1px;
+	height: 1px;
+	background: #ccc;
+	border: 1px solid;
+	top:10px;
+	left:0px;
+}
+
+</style>
+<script type="text/javascript" src="/ssp_new/assets/c473a780/jquery.js"></script>
+</head>
+<body>
+<div class="el" id="el">
+	<img  id="img1" src="images/transparent.gif" data-src="aaa.png"/>
+	<span id="span1">sss</span>
+	<label id="lb1"></label>
+	<button onclick="out()">out</button>
+	<canvas id="canvas" width="10" height="10" style="position:absolute;left:10px;top:10px;">
+			
+
+	</canvas>
+	<canvas id="canvas2" width="10" height="10"  style="position:absolute;left:30px;top:50px;">
+			
+
+	</canvas>
+	<canvas id="canvas3" width="10" height="10" style="position:absolute;left:50px;top:100px;">
+			
+
+	</canvas>
+	<canvas id="canvas4" width="10" height="10" style="position:absolute;left:70px;top:150px;">
+			
+
+	</canvas>
+	<canvas id="canvas5" width="10" height="10" style="position:absolute;left:100px;top:200px;">
+			
+
+	</canvas>
+	</div>
+</div>
+<div id="el2" class="el2">
+
+</div>
+
+<script>
+
+	var lb1 = document.getElementById('lb1');
+	var img1 = document.getElementById('img1');
+	var el = document.getElementById('el')
+	var obj = {};
+
+	
+/*	setInterval(function(){
+		var lb1Rect = el.getBoundingClientRect();
+		if(obj.top!=lb1Rect.top)
+		{
+			obj =lb1Rect;
+			console.log(obj);
+		}
+	},1000)*/
+	//console.log(img1.scrollintoview())
+	function out(){
+	console.log(window.screenX,window.screenY);
+	console.log(window.innerWidth,window.innerHeight)
+	console.log(window.pageXOffset,window.pageYOffset)
+	console.log(screen.availWidth,screen.availHeight)
+	console.log(document.getElementById('img1').getBoundingClientRect())
+	console.log(parent);
+	}
+
+
+	var $el2 = $('#el2');
+	var time =0;
+	var fps=0;	
+	var time = performance.now();	
+	var count =0;0
+
+	function draw(canvas){
+
+
+	var ctx =canvas.getContext('2d');
+	ctx.clearRect(0,0,10,10);
+	ctx.shadowBlur=20;
+	ctx.shadowColor="black";
+	ctx.globalAlpha=0.2;
+
+	for(var i=0;i<20;i++)
+	{
+		ctx.fillStyle = '#ffffff';
+		ctx.strokeStyle = '#000000';
+		ctx.fillRect(Math.random()*10,Math.random()*10,i+Math.random()*10,i+Math.random()*10);
+	}
+}
+
+
+function draw2(el)
+{
+	$('#el').html('');
+	for(var i=0;i<10;i++)
+	{
+		var $item = $('<div style="width:1px;height:1px;background:blue;position:absolute;left:'+300*Math.random()+'px;"></div>');
+		$('#el').append($item);
+	}
+
+
+}
+
+function draw3(el){
+	
+}
+
+function loop(){
+	interval = performance.now() -time;
+	fps++;
+	if(interval >= 1000)
+	{
+		console.log(count+','+fps);
+		time = performance.now();
+		fps = 0;
+		count++;
+	}
+}
+
+function draw1()
+{
+	loop();
+	draw(document.getElementById('canvas'))
+	draw(document.getElementById('canvas2'))
+	draw(document.getElementById('canvas3'))
+	draw(document.getElementById('canvas4'))
+	draw(document.getElementById('canvas5'))
+	//draw2();
+	requestAnimationFrame(draw1);
+
+}
+
+	
+		
+	function render()
+	{
+		//setInterval(draw,16);
+		requestAnimationFrame(draw1);
+	}
+
+	render();
+
+</script>
+</body>
+</html>
