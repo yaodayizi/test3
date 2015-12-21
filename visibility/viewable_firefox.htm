@@ -1,0 +1,55 @@
+<!doctype html>
+<style>
+	iframe{ 
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 10px;
+		height: 10px;
+		border: none;
+		background-color: red;
+	}
+	.iframe2{
+		left: auto !important;
+		right: 0;
+	}
+	.iframe3{
+		top: 300px;
+	}
+	.iframe5{
+		left: auto !important;
+		right: 0;
+		top: 300px;
+	}
+	.iframe6{
+		top: 600px;
+	}
+	.iframe7{
+		left: auto !important;
+		right: 0;
+		top: 600px;
+	}
+</style>
+<body> 
+ 
+<script>
+var _genTestCode = function(strCodeId){
+	return 'var now=function(){return +new Date()};var _count=0;var requestAniFrameId;var start=function(){requestAniFrameId=requestAnimationFrame(update)};var update=function(a){requestAniFrameId=requestAnimationFrame(update);_count++};var _time=now();var interval=function(){window.cancelAnimationFrame(requestAniFrameId);var a=now();var b=((_count*1000)/(a-_time))|0;_time=a;_count=0;console.log("frame '+strCodeId+'",b, document.visibilityState);start();setTimeout(interval,1000)};start();setTimeout(interval,1000);';
+};
+
+var _generateIframe = function(id){
+	var iframe = document.createElement('iframe');
+	iframe.src = 'javascript:' + _genTestCode(id);
+	iframe.className = id;
+	document.body.appendChild( iframe );
+};
+
+_generateIframe('iframe1');
+_generateIframe('iframe2');
+_generateIframe('iframe3');
+_generateIframe('iframe5');
+_generateIframe('iframe6');
+_generateIframe('iframe7');
+
+</script> 
+</body>

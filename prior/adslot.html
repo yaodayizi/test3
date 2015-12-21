@@ -1,0 +1,130 @@
+
+<link rel="stylesheet" type="text/css" href="http://localhost/ifc_rtb_devs/themes/default/css/list.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost/ifc_rtb_devs/themes/default/css/pager.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost/ifc_rtb_devs/themes/default/css/solution_adslotset.css" />
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="http://localhost/ifc_rtb_devs/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" href="http://localhost/ifc_rtb_devs/themes/default/css/form.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost/ifc_rtb_devs/themes/default/css/directional.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost/ifc_rtb_devs/themes/default/css/stepflow.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost/ifc_rtb_devs/css/jQuery.niceTitle.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost/ifc_rtb_devs/assets/8c0820a3/jui/css/base/jquery.ui.all.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost/ifc_rtb_devs/css/superfish.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost/ifc_rtb_devs/themes/default/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost/ifc_rtb_devs/themes/default/css/global.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost/ifc_rtb_devs/themes/default/css/fix_ie.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost/ifc_rtb_devs/themes/default/css/layout.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost/ifc_rtb_devs/themes/default/css/button.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost/ifc_rtb_devs/themes/default/css/bread_crumb.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost/ifc_rtb_devs/themes/default/css/error.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost/ifc_rtb_devs/themes/default/css/newDialog.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost/ifc_rtb_devs/css/jppopuppanel.css" />
+<script type="text/javascript" src="http://localhost/ifc_rtb_devs/assets/8c0820a3/jquery.js"></script>
+<script type="text/javascript" src="http://localhost/ifc_rtb_devs/assets/8c0820a3/jui/js/jquery-ui.min.js"></script>
+
+<script type="text/javascript" src="http://localhost/ifc_rtb_devs/js/json2.js"></script>
+<script type="text/javascript" src="http://localhost/ifc_rtb_devs/js/AYfactory.min.js"></script>
+<script type="text/javascript" src="http://localhost/ifc_rtb_devs/js/AYfactory.extends.min.js"></script>
+<script type="text/javascript" src="http://localhost/ifc_rtb_devs/themes/default/js/sysWinFactory.js"></script>
+
+
+
+
+
+<script type="text/javascript" src="http://localhost/ifc_rtb_devs/assets/8c0820a3/jquery.js"></script>
+<script src="http://localhost/ifc_rtb_devs/js/knockout-2.2.1.js"></script>
+<script src="http://localhost/ifc_rtb_devs/js/knockout-2.2.1.js"></script>
+<script src="solutionAdSlotSetVM.js"></script>
+<script src="solutionAdSlotSet.js"></script>
+ 
+<div class="ad_slot_picker" id="solution_ad_slot_picker">
+    <h2>选择广告位</h2>
+    <ul class="search_condition"> 
+        <li class="item">
+            <b>网站</b>
+            <input type="text" data-bind="value: search.site"> 
+        </li>
+        <li class="btnbar">
+            <button type="button" data-bind="click: btnEvent.filterList">搜索</button>
+        </li> 
+    </ul>
+    <div class="data_list">
+        <div class="unselected_list">
+            <div class="list_show">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="check_col"><input type="checkbox" class="check_all" data-bind="disable: list.unselected().length == 0, checked: status.checkAllOfUnselected, click: btnEvent.checkAllOfUnselected"></th>
+                            <th class="adslotid_col">广告位ID</th>
+                            <th class="site_col">网站</th>
+                            <th class="channel_col">频道</th>
+                            <th class="size_col">尺寸</th>
+                            <th class="position_col">位置</th>
+                        </tr> 
+                    </thead>
+                    <tbody>
+                        <!--ko foreach: list.unselected-->
+                        <tr>
+                            <td class="check_col"><input type="checkbox" class="check_item" data-bind="value: $root.genCustomData(ID, adSlotId), checked: $root.list.checkedOfUnSelectedList"></td>
+                            <td class="adslotid_col ellipsis" data-bind="text: adSlotId, attr:{title: adSlotId}"></td>
+                            <td class="site_col ellipsis" data-bind="text: site, attr:{title: site}"></td>
+                            <td class="channel_col ellipsis" data-bind="text: channel, attr:{title: channel}"></td>
+                            <td class="size_col" data-bind="text: size"></td>
+                            <td class="position_col" data-bind="text: position"></td>
+                        </tr>
+                        <!--/ko-->
+                        <tr data-bind="if: 0 === list.unselected().length">
+                            <td colspan="6">-- 无数据 --</td>
+                        </tr>
+                    </tbody> 
+                </table>
+            </div>
+            <div class="pager_show">
+                <div class="turn_page">
+                    <ul id="pager" data-bind="html: list.pager.html, click: btnEvent.clickPage">
+                    </ul>
+                </div>
+                <div class="page_total">
+                    当前选中<b data-bind="text: list.checkedOfUnSelectedList().length"></b>项, 共有<b data-bind="text: list.pager.total"></b>项(16项/页)
+                </div>
+            </div>      
+        </div>
+        <div class="selected_list">
+            <div class="btns_shortcut">
+                <button type="checkbox" class="items_select" title="选中" data-bind="disable: status.selectIsDisable, click: btnEvent.selectItems"><b>选中</b></button>
+                <button type="checkbox" class="items_remove" title="移除" data-bind="disable: status.removeIsDisable, click: btnEvent.removeItems"><b>移除</b></button>
+            </div>
+            <ul class="items_show">
+                <li class="title">
+                    <span class="chk">
+                        <input type="checkbox" data-bind="disable: list.selected().length == 0, checked: status.checkAllOfSelected, click: btnEvent.checkAllOfSelected">
+                    </span>
+                    <b>已选中</b>
+                </li>
+            </ul>
+            <ul class="items_show selected" data-bind="foreach: list.selected"> 
+                <li class="item">
+                    <span class="chk">
+                        <input type="checkbox" data-bind="value: $data.ID, checked: $parent.list.checkedOfSelectedList">
+                        <input type="hidden" name="TaxonomyAdSpace[ConditionValue][]" data-bind="value: $data.ID">
+                    </span>
+                    <b data-bind="text: $data.adSlotId, attr:{title: $data.adSlotId}"></b>
+                </li> 
+            </ul>
+            <div class="pager_show">
+                <div class="page_total">
+                    当前选中<b data-bind="text: list.checkedOfSelectedList().length"></b>项, 共有<b data-bind="text: list.selected().length"></b>项
+                </div>
+            </div>      
+        </div>
+    </div>    
+<script type="text/javascript">      
+    ;( function ( data ){
+              data = {"url":"\/ifc_rtb_devs\/adManager\/taxoAdSpace\/filterAdSlot?sid=5",sspMarket: "_mediamax" } ; 
+                __app[ 'adSlotSet' ]( { 'selected': [] }, data); 
+            })();
+</script>
+
+

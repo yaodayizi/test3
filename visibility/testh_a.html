@@ -1,0 +1,189 @@
+<!DOCTYPE html style="transform: translateZ(0px);">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<style>
+#container{
+	width:500px;
+	height:200px;
+	background: red;
+}
+#test1{
+	width:200px;
+	height: 1800px;
+	background: #cccccc;
+/* 	opacity: 0.5;
+ */
+}
+</style>
+<script type="text/javascript" src="/ssp_new/assets/c473a780/jquery.js"></script>
+</head>
+<body>
+<!--<img src="images/test2.png">-->
+
+<div id="frame_count" style="width:200px;height:200px">
+
+</div>
+<div id="container">
+	<div id="test1" >
+<!-- 		<img id='img1' src="" width="1" height="1" />
+		 -->		<canvas id="canvas" width="10" height="10" style="">
+
+	</div>
+</div>
+
+
+<!-- <div id="test2">
+	<canvas id="canvas2" width="10" height="10" style="">
+
+</div> -->
+
+
+<!-- <video id="media"  loop muted src="images/test15s.mp4" controls width="480px" heigt="360px"></video>
+ -->
+<!--  <div id="chartsContainer" style="width:1000px;height:500px;overflow:scroll">
+<div id="charts" style="width:3600px;height:500px;background:#ccc">
+
+</div>
+</div> -->
+
+
+<script>
+window.requestAnimationFrame = function() {
+	return 	function(f) {
+			window.setTimeout(f,1e3/60);
+		}
+}();
+
+var container = getEl('#container');
+var test1 = getEl('test1');
+var test2 = getEl('test2');
+//var img1 = getEl('#img1');
+var canvas = getEl('canvas');
+var canvas2 = getEl('canvas2');
+var arr1 =[];
+var arr2=new Array(360);
+var arr3 = new Array(360);
+var img = new Image();
+/*img.src='images/test.png';
+img1.src='images/test.png';*/
+var count = 0;
+
+var fps = 30;
+var now;
+var then = Date.now();
+var interval = 1000/fps;
+var delta;
+
+// For this demo
+var counter = 0;
+var first = then;
+
+
+function getEl(id){
+	return document.getElementById(id); 
+}
+
+function draw(canvas){
+
+	var start = +new Date();
+
+	var ctx =canvas.getContext('2d');
+	ctx.clearRect(0,0,10,10);
+	ctx.shadowBlur=20;
+	ctx.shadowColor="black";
+	ctx.globalAlpha=0.2;
+
+	for(var i=0;i<100;i++)
+	{
+		ctx.fillStyle = '#ffffff';
+		ctx.strokeStyle = '#000000';
+		ctx.fillRect(Math.random()*10,Math.random()*10,i+Math.random()*10,i+Math.random()*10);
+	}
+	//var arr = ctx.getImageData(0,0,10,10);
+  	var time = +new Date()-start;
+
+   	return time;
+}
+
+
+function process()
+{
+
+
+	now = Date.now();
+	delta = now - then;
+	//console.log(delta);
+	
+	if (delta > interval) 
+	{
+		// update time stuffs
+		
+		// Just `then = now` is not enough.
+		// Lets say we set fps at 10 which means
+		// each frame must take 100ms
+		// Now frame executes in 16ms (60fps) so
+		// the loop iterates 7 times (16*7 = 112ms) until
+		// delta > interval === true
+		// Eventually this lowers down the FPS as
+		// 112*10 = 1120ms (NOT 1000ms).
+		// So we have to get rid of that extra 12ms
+		// by subtracting delta (112) % interval (100).
+		// Hope that makes sense.
+		
+		then = now - (delta % interval);
+		
+		// ... Code for Drawing the Frame ...
+		var time_el = (then - first)/1000;
+		++counter;
+		var fpss = parseInt(counter/time_el);
+		//$('#frame_count').innerHTML = ++counter + 'f / ' + parseInt(time_el) + 's = ' + parseInt(counter/time_el) + 'fps';
+		//console.log('fps',fpss,counter,parseInt(time_el)+'f');
+		//getEl('#frame_count').innerHTML =counter + 'f / '+ parseInt(time_el) + 's = '+fpss;
+
+
+	  var t1 = draw(canvas);
+
+	  arr1.push(t1);
+		
+
+	  count++;
+
+	  //console.log(t1,count)
+
+	  	if(count<100)
+	  	{
+	 		
+	  	}
+	  	else
+	  	{
+
+	  		var l = arr1.length;
+	  		var sum =0;
+	  		for(var i=0;i<l;i++)
+	  		{
+	  			sum += arr1[i];
+	  		}
+	  		var avg = sum / l;
+
+	  		console.log(avg,'end',fpss);
+
+	  	}
+
+	}
+	if(count<100){
+		requestAnimationFrame(process);
+	}
+
+
+}
+
+
+
+requestAnimationFrame(process);
+
+
+</script>
+</body>
+</html>

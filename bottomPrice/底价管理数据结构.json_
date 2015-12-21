@@ -1,0 +1,80 @@
+//后端返回给前端数据
+{
+result:1,//result为0表示提交失败,相应会有msg错误信息
+msg:"",
+data:{
+		"adsInfo":{
+			...
+		},
+		"provinceCity":{
+			"省编码":["城市编码","城市编码"//...],
+			"省编码":["城市编码","城市编码"//...]
+			//...
+		},
+		"regionCode":{
+			"城市编码":"城市名称",
+			"城市编码":"城市名称"
+			//...
+		},
+		"shortcuts":[{
+			"title":"一线城市"，
+			"city":["城市编码","城市编码"//...]
+		},
+		{
+			"title":"二线城市"，
+			"city":["城市编码","城市编码"//...]
+		},
+		{
+			"title":"三线城市"，
+			"city":["城市编码","城市编码"//...]
+		}
+		],
+		"selectedItems:"[{
+			"selected":["城市编码","城市编码"],
+			"price":232.2
+			},
+			//...
+		]
+	}
+}
+
+//前端提交给后端
+POST
+	adsID:""
+	selectedItems:'[{
+		"selected":{
+			regionCode:["城市编码","城市编码"],
+			isAll:true
+		}
+		"price":232.2
+	},
+	//...
+	]'
+
+
+后端返回
+{
+	result:1, //result为0表示提交失败,相应会有msg错误信息
+	msg:""
+}
+
+
+/**
+ * 
+ */
+
+	selectedItems:'[{
+		"selected":{
+			regionCode:{
+				//"省编码":["城市编码","城市编码"],
+				provincecode:["cityCodeA","cityCodeB"],
+				provincecode:["cityCodeA","cityCodeB"],
+				provincecode:"all",//省全选
+				},
+				
+			},
+			isAll:true,
+			"price":232.2
+		}
+	//...
+	]'

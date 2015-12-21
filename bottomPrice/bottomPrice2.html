@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/ssp_new/themes/default/css/reset.css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+    .body{
+    	width:800px;
+    	margin:0 auto;
+    }
+
+	.region-select{
+		overflow: hidden;
+	}
+	.selected-list{
+		width:45%;
+		height: 160px;
+		border:1px solid;
+		float:left;
+	}
+	.selected-item{
+		
+	}
+
+	.selected-item  li {
+		overflow: hidden;
+		width:40%;
+
+	}
+	.selected-item > li > span {
+		float:left;
+		display:block;
+		margin:2px;
+	}
+	.selected-subItem{
+		overflow: hidden;
+	}
+	.selected-subItem li{
+		width:auto;
+		float: left;
+		margin:2px;
+	}
+
+	.region-list{
+		width:54%;
+		float:right;
+	}
+	.region-items{
+/* 		overflow: hidden;
+	 */	}
+	.region-items > li{
+		float:left;
+
+	}
+
+	.region-items button{
+		width:18px;
+		height: 18px;
+	}
+
+	.region-subItems {
+
+		position: relative;
+		
+	}
+
+	.region-subItems ul{
+		position: absolute;
+		border:  1px solid;
+		z-index: 100;
+		padding:5px;
+		width:200px;
+		background: #fff;
+	}
+
+	.region-subItems li{
+		float:left;
+		padding:2px 2px;
+		width:80px;
+
+	}
+
+    </style>
+    <script src="http://localhost/ssp_new2/js/libs/knockout-2.2.1.js"></script>
+    <script src="http://localhost/ssp_new2/js/libs/knockout.mapping.min.js"></script>
+    <script src="http://localhost/ssp_new2/assets/c0937cae/jquery.js"></script>
+    <script src="newData.js"></script>
+
+
+</head>
+<body>
+
+<div class="body">
+    <div id="cityContainer" class="region-ctn">
+	        <div class="selected-list">
+	            <ul data-bind="foreach:area" class="selected-item">
+	                <!-- ko if: isSelected-->
+	                <li><span data-bind="text:getProvinceName()"></span></li>
+	                <!--/ko-->
+	                <!--ko ifnot:isSelected-->
+	                <!--ko if: selectedItems().length>0-->
+	                <li><span data-bind="text:name+' : '"></span>
+	                <ul class="selected-subItem">
+	                    <!--ko foreach:selectedItems-->
+	                    <li><span data-bind="text:$root.getName($data)"></span></li>
+	                    <!--/ko-->
+	                </ul>
+	                </li>
+	                <!--/ko-->
+	                <!--/ko-->
+	            </ul>
+
+	        </div>
+	        <div class="region-list">
+
+	                <ul data-bind="foreach:area" class="region-items">
+	                    <li>
+	                        <label>
+	                            <input type="checkbox" data-bind="checked:isSelected,value:code,disable:disabled()"><span data-bind="text:name"></span></label>
+							 <!--ko if:children.length>0-->
+	                            <button value="click" data-bind="click:showChild,disable:disabled()">^</button>
+	                       
+							<div class="region-subItems">
+	                        <ul data-bind="visible:childVisible">
+
+	                        	<li >
+	                                <label>
+	                                    <input type="checkbox" data-bind="checked:isSelected"><span>全选</span></label>
+	                        	</li>
+
+	                        	<!--ko foreach:children-->
+	                            <li>
+	                                <label>
+	                                    <input type="checkbox" data-bind="checkedValue:$parent.selectedItems,checked:$parent.selectedItems,value:code,disable:disabled()"><span data-bind="text:name"></span></label>
+	                            </li>
+	                            <!--/ko-->
+
+	                        </ul>
+	                        </div>
+	                        <!--/ko-->
+	                    </li>
+	                 </ul>
+	            
+    <div>
+    		<span data-bind="text:$root.currentPrice">aaa</span>
+			<label><input type="text" value="" data-bind="value:$root.currentPrice"> </label> <button  id="btnAdd">加入策略列表</button>
+	</div>
+
+
+	</div>
+</div>
+</div>
+	<div id="priceRows">
+		
+
+		<table data-bind="foreach:rows">
+			<tr>
+				<td>
+					<span data-bind="text:price"></span>
+				</td>
+				<td>
+					<!--ko foreach:codes-->
+					<span data-bind="text:$data"></span>
+					<!--/ko-->
+				</td>
+				<td>
+					<a href="javascript:void(0)" data-bind="click:$root.removeClick">del</a>
+				</td>
+			</td>
+		</table>
+
+	<div >
+		<button data-bind="click:save">保存</button> <button>取消</button>
+	</div>
+	</div>
+
+
+<script>
+/*function transformData(){
+	this.data.regionCode ={};
+
+	this.fromData=function(cityData){
+		this.regionCodeInit(data.the1cities);
+		this.regionCodeInit(data.the2cities);
+		this.provinceCity = this.cityOwnerShip;
+		return this.data;
+	}
+	this.regionCodeInit=function(the1cities){
+		for(var i=0;i<the1cities.length;i++)
+		{
+			this.data.regionCode[the1cities[i].i] = the1cities[i].t;
+		}
+	}
+}
+
+var tfd = new transformData();
+tfd.fromData(data);
+console.log(tfd.regionCode);
+*/
+var _cityVM = (function(){
+
+	var data={
+		area:{},
+		codeTree:{},
+		codeName:{},
+		shortcuts:{
+			level0:[],
+			level1:[],
+			level2:[]
+		},
+		currentSelectedItems:[]
+	};
+
+	var fromData = function(_data){
+		data.area = _data;
+
+
+		for(var i=0;i<data.area.length;i++)
+		{
+			var item = data.area[i];
+
+
+			
+			if(!data.codeTree[item.code])
+			{
+				data.codeTree[item.code] =[];
+			}
+
+			data.codeName[item.code] = {name:item.name,pIndex:0,index:i};
+
+
+			item.disabled = ko.observable(false);
+			item.selectedItems = ko.observableArray();
+
+			if(!item["children"])
+			{
+				item['children']=[];
+			}
+
+			item._isSelected = ko.observable(false);
+
+			item.isSelected = ko.computed({
+				read:function(){
+					//console.log(this,data);
+					if(this.children.length>0)
+					{
+						return this.children.length == this.selectedItems().length;
+					}
+					else
+					{
+						return  this._isSelected();
+					}
+				},
+				write:function(value){
+					if(this.children.length>0)
+					{
+						if(value)
+						{
+							this.selectedItems.removeAll();
+							for(var v in this.children)
+							{
+								if(!this.children[v].disabled())
+								{
+									this.selectedItems.push(this.children[v].code);
+								}
+							}
+							//console.log(this.selectedItems(),this.selectedItems().length);
+						}else{
+							this.selectedItems.removeAll();
+						}
+					}
+					else{
+						this._isSelected(value);
+						console.log(this._isSelected());
+					}
+
+				}
+			},item);
+
+/*			item.childIsSelected=function(code){
+				return item.selectedItems.indexOf(code)>=0;
+			}*/
+
+			item.childVisible = ko.observable(false);
+
+			item.showChild = function()
+			{
+				!this.childVisible() ? this.childVisible(true) : this.childVisible(false);
+			}
+
+			item.getProvinceName = function(){
+				if(this._isSelected())
+				{
+					return this.name + ' : 已选';
+				}
+				else if(this.isSelected())
+				{
+					return this.name + ' : 全选';
+				}
+			}
+
+
+
+			if("children" in item)
+			{
+				for(var j=0;j<item.children.length;j++)
+				{
+					var child = item.children[j];
+					//child.isSelected = ko.observable(false);
+					child.disabled = ko.observable(false);
+					data.codeTree[item.code].push(child.code);
+					data.shortcuts['level'+child.level].push(child.code);
+					data.codeName[child.code] = {name:child.name,pIndex:i,index:j};
+
+				}
+
+			}
+
+		}
+
+		data.getName = function(code){
+			return data.codeName[code].name;
+		};
+
+		data._currentPrice = ko.observable(0);
+		data.currentPrice = ko.computed({
+			read:function(){
+				return this._currentPrice();
+			},
+			write:function(value){
+				var num = isNaN(parseInt(value, 10)) ? this._currentPrice() : parseFloat(value, 10);
+				num = num > 999999999 ? 999999999 : num;
+				this._currentPrice(value);
+				this._currentPrice(num);
+			},
+			owner: this.data
+			
+		});
+
+
+
+		data.getVals = function(){
+			var arr = [];
+			for(var i=0;i<data.area.length;i++)
+			{
+				var node=data.area[i];
+				if(node.children.length>0)
+				{
+					if(node.children.length == node.selectedItems().length)
+					{
+						arr.push(node.code);
+					}
+					else if(node.selectedItems().length>0)
+					{
+						arr = arr.concat(node.selectedItems());
+					}
+				}
+				else
+				{
+					if(node._isSelected())
+					{
+						arr.push(node.code);
+					}
+				}
+			}
+
+			return arr;
+		}
+
+		data.setDisableds = function(codes,bool)
+		{
+				var len = codes.length;
+				for(var i=0;i<len;i++)
+				{
+					var codeNode = data.codeName[codes[i]];
+					var node = codeNode.pIndex ==0 ? data.area[codeNode.index] : data.area[codeNode.pIndex]['children'][codeNode.index];
+					console.log(node.name,node,codeNode);
+					node.disabled(bool);
+					if(bool)
+					{
+						if(codeNode.pIndex==0)
+						{
+							node._isSelected(false);
+							node.selectedItems.removeAll();
+						}
+						else{
+							var parent = data.area[codeNode.pIndex];
+							parent.selectedItems.removeAll();
+						}
+					}
+				}
+		}
+
+		data.clickAdd=function(){
+
+			var codes = data.getVals();
+			if(codes.length<0)
+			{
+				alert('请选择城市');
+				return false;
+			}
+			if(data.checkIsAll(codes))
+			{
+				alert('不能选择全国');
+				return;
+			}
+			var price = data.currentPrice();
+			if(price<=0)
+			{
+				alert('底价必须大于0');
+				return;
+			}
+			console.log('codes',codes);
+			data.setDisableds(codes,true);
+			//_priceRows.add(codes,data.currentPrice());
+			$('#btnAdd').trigger('insertRow',[codes,data.currentPrice()]);
+			data._currentPrice(0);
+			//console.log(_priceRows);
+		}
+		data.checkIsAll = function(codes)
+		{
+			return codes.length == data.area.length;
+		}
+
+
+		$('#btnAdd').bind('click',data.clickAdd);
+	};
+
+
+
+	return{
+		data:data,
+		fromData:fromData,
+
+	}
+
+
+})();
+
+var _priceRows = (function(){
+	
+	var isAll = false;
+	var rows = ko.observableArray();
+	var init = function(dataArr){
+		if(dataArr.length>0)
+		{
+			rows = ko.observableArray(dataArr);
+		}
+	}
+	var add=function(codes,price){
+		if(!checkPrice(price)){
+			alert('价格不能跟已有价格一样');
+			return false;
+		}
+		rows.push({codes,price});
+		//checkIsAll();
+		console.log(rows());
+	};
+	var removeClick=function(){
+		_cityVM.data.setDisableds(this.codes,false);
+		rows.remove(this);
+	};
+	var checkPrice =function(price){
+		for(var i=0;i<rows().length;i++)
+		{
+			if(rows()[i].price == price)
+			{
+				
+				return false;
+				break;
+			}
+		}
+		return true;
+	}
+
+	var save = function(){
+		var postData = {
+			adsID:data.data.adsInfo.adspaceId,
+			basePrice:data.data.adsInfo.basePrice,
+			selectedItems:rows()
+
+		}
+		console.log(postData);
+		$.ajax({
+			url:"create.html",
+			data:postData,
+			contentType:"application/json",
+			type:"post",
+			dataType:"json",
+			processData:false,
+			success:function(data){
+				if(data.result)	
+				{
+					alert('保存成功');
+				}	
+				else
+				{
+					alert(data.msg);
+				}
+			},
+			error:function(request,msg,err){
+				alert(msg);
+			}
+		});
+
+	}
+
+	$('#btnAdd').on('insertRow',function(e,codes,price){
+		add(codes,price);
+	});
+
+
+	return {
+		add:add,
+		removeClick:removeClick,
+		rows:rows,
+		save:save,
+		init:init
+	}
+
+})();
+_cityVM.fromData(data.data.helper);
+//console.log(_cityVM.data);
+//_priceRows.init(data.selected);
+ko.applyBindings(_cityVM.data,document.getElementById('cityContainer'));
+ko.applyBindings(_priceRows,document.getElementById('priceRows'));
+</script>
+</body>
+</html>

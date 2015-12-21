@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<!--[if lte IE 9]><html class="ie9"><![endif]-->
+<!--[if !IE]><!--> <html><!--<![endif]-->
+        <head>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+            <meta charset="utf-8">
+            <link rel="shortcut icon" href="/ssp_new/favicon.ico" type="image/x-icon" />
+            <link rel="stylesheet" type="text/css" href="/ssp_new/themes/default/css/superfish.css" />
+<link rel="stylesheet" type="text/css" href="/ssp_new/themes/default/css/reset.css" />
+<link rel="stylesheet" type="text/css" href="/ssp_new/themes/default/css/layout.css" />
+<link rel="stylesheet" type="text/css" href="/ssp_new/themes/default/css/button.css" />
+<link rel="stylesheet" type="text/css" href="/ssp_new/themes/default/css/bread_crumb.css" />
+<link rel="stylesheet" type="text/css" href="/ssp_new/css/jppopuppanel.css" />
+<link rel="stylesheet" type="text/css" href="/ssp_new/css/plugins/jquery.multiselect.css" />
+<link rel="stylesheet" type="text/css" href="/ssp_new/themes/default/css/form.css" />
+<link rel="stylesheet" type="text/css" href="/ssp_new/css/jQuery.niceTitle.css" />
+<link rel="stylesheet" type="text/css" href="/ssp_new/themes/default/css/plugins/jquery-ui1.8.21.css" />
+<link rel="stylesheet" type="text/css" href="/ssp_new/themes/default/css/global.css" />
+<link rel="stylesheet" type="text/css" href="/ssp_new/themes/default/css/fix_ie.css" />
+<script type="text/javascript" src="/ssp_new/assets/9ec80835/jquery.js"></script>
+<script type="text/javascript" src="/ssp_new/assets/9ec80835/jui/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/ssp_new/js/validator/cn/dict.js"></script>
+<script type="text/javascript" src="/ssp_new/js/jquery.ui.extend.js"></script>
+<script type="text/javascript" src="/ssp_new/js/jquery.ui.datepicker-zh-CN.js"></script>
+<script type="text/javascript" src="/ssp_new/js/plugins/jquery.multiselect.js"></script>
+<script type="text/javascript" src="/ssp_new/js/AYfactory.min.js"></script>
+<script type="text/javascript" src="/ssp_new/js/AYfactory.extends.min.js"></script>
+<script type="text/javascript" src="/ssp_new/js/jppopuppanel.js"></script>
+<script type="text/javascript" src="/ssp_new/themes/default/js/sysWinFactory.js"></script>
+<script type="text/javascript" src="/ssp_new/themes/default/js/page.config.js"></script>
+<script type="text/javascript" src="/ssp_new/themes/default/js/superfish.js"></script>
+<script type="text/javascript" src="/ssp_new/themes/default/js/supersubs.js"></script>
+<script type="text/javascript" src="/ssp_new/themes/default/js/common.js"></script>
+<script type="text/javascript" src="/ssp_new/js/libs/knockout-2.2.1.js"></script>
+<script type="text/javascript" src="/ssp_new/js/ko.extend.multiselect.js"></script>
+<script type="text/javascript" src="/ssp_new/js/ko.extend.datepicker.js"></script>
+<script type="text/javascript" src="/ssp_new/themes/default/js/app/admin/center/deal/priorform.js"></script>
+<script type="text/javascript" src="/ssp_new/themes/default/js/app/admin/center/deal/solutionAdSlotSet.js"></script>
+<script type="text/javascript" src="/ssp_new/themes/default/js/viewmodel/solutionAdSlotSetVM.js"></script>
+<script type="text/javascript" src="/ssp_new/themes/default/js/jQuery.niceTitle.js"></script>
+<script type="text/javascript" src="/ssp_new/js/validator/jquery.listen.js"></script>
+<script type="text/javascript" src="/ssp_new/js/validator/jquery.progressbar.js"></script>
+<script type="text/javascript" src="/ssp_new/js/validator/jquery.validate.js"></script>
+<script type="text/javascript" src="/ssp_new/js/validator/jquery-extendvalidate.js"></script>
+<script type="text/javascript" src="/ssp_new/js/validator/jquery-inputlenstatus.js"></script>
+<title>
+                Allyes mediamax平台，中国首家供应方平台 - 交易管理            </title> 
+
+         
+        </head>
+        <body>  
+            <div class="container">
+                <div id="main">
+                    <div class="header gb_header">
+                        <div class="gb_top">
+                            <div class="logo">
+                                <h1 class="admin"><a href="/ssp_new/site">新好耶，SSP</a></h1>
+                            </div>
+                            <div id="user_select_list" class="user_select_list">
+                             <p>root</p>
+                                <ul><li><a href="/ssp_new/admin/account/user/update">基本资料</a>|</li><li><a href="/ssp_new/admin/account/user/changepassword">修改密码</a>|</li><li><a href="/ssp_new/admin/center">系统设置</a>|</li><li class="last logout"><a href="/ssp_new/site/logout">退出</a></li></ul>
+                            </div>
+                        </div> 
+                        <div class="main-menus">
+                            <div class="mainNav"> 
+                                <ul id="AYDSPMainMenu" class="sf-menu ayssp-mainmenu">
+                                    <li data-menu-id="">
+<a href="/ssp_new/admin">首页</a>
+</li>
+<li data-menu-id="account-manage">
+<a>账户管理</a>
+<ul>
+<li data-menu-id="">
+<a href="/ssp_new/admin/account/buyer/list">买方管理</a>
+</li>
+<li data-menu-id="">
+<a href="/ssp_new/admin/account/seller/list">卖方管理</a>
+</li>
+<li data-menu-id="">
+<a href="/ssp_new/admin/account/operator/list">运营管理</a>
+</li>
+<li data-menu-id="">
+<a href="/ssp_new/admin/account/admin/list">系统管理</a>
+</li>
+</ul>
+</li>
+<li data-menu-id="">
+<a href="/ssp_new/admin/bs">买卖关系管理</a>
+</li>
+<li data-menu-id="media-resource-manage">
+<a>资源管理</a>
+<ul>
+<li data-menu-id="">
+<a href="/ssp_new/admin/media/site/list">网站管理</a>
+</li>
+<li data-menu-id="">
+<a href="/ssp_new/admin/media/channel/list">频道管理</a>
+</li>
+<li data-menu-id="">
+<a href="/ssp_new/admin/media/adSpace/list">展示广告位管理</a>
+</li>
+<li data-menu-id="">
+<a href="/ssp_new/admin/media/adSpaceVideo/list">视频广告位管理</a>
+</li>
+<li data-menu-id="">
+<a href="/ssp_new/admin/media/app/list">应用管理</a>
+</li>
+<li data-menu-id="">
+<a href="/ssp_new/admin/media/appAdSpace/list">应用广告位管理</a>
+</li>
+<li data-menu-id="">
+<a href="/ssp_new/admin/media/adTraffic/list">流量管理</a>
+</li>
+</ul>
+</li>
+<li data-menu-id="creative-check">
+<a>创意审核</a>
+<ul>
+<li data-menu-id="">
+<a href="/ssp_new/admin/creative/preaudit/list">创意预审核</a>
+</li>
+<li data-menu-id="">
+<a href="/ssp_new/admin/creative/postaudit/list">创意后审核</a>
+</li>
+<li data-menu-id="">
+<a href="/ssp_new/admin/creative/video/list">视频创意审核</a>
+</li>
+<li data-menu-id="">
+<a href="/ssp_new/admin/creative/shield/list">创意屏蔽</a>
+</li>
+<li data-menu-id="">
+<a href="/ssp_new/admin/creative/videoshield/list">视频创意屏蔽</a>
+</li>
+</ul>
+</li>
+<li data-menu-id="">
+<a href="/ssp_new/admin/report?rt=PlatformTrade">数据报表</a>
+</li>
+<li data-menu-id="action-log">
+<a>操作日志</a>
+<ul>
+<li data-menu-id="">
+<a href="/ssp_new/admin/log/buyer/list">买方日志</a>
+</li>
+<li data-menu-id="">
+<a href="/ssp_new/admin/log/seller/list">卖方日志</a>
+</li>
+<li data-menu-id="">
+<a href="/ssp_new/admin/log/admin/list">管理员日志</a>
+</li>
+<li data-menu-id="">
+<a href="/ssp_new/admin/log/operator/list">运营日志</a>
+</li>
+</ul>
+</li>
+                                </ul> 
+                            </div>
+                        </div> 
+                        <script> 
+                            (function($) {
+                                $(function() {
+                                    $('#AYDSPMainMenu').superfish({
+                                        delay: 500,
+                                        animation: {marginTop: 0, opacity: 'show'},
+                                        onBeforeShow: function() {
+                                            this.css('margin-top', -20);
+                                        }
+                                    });
+                                });
+                            })(jQuery);
+                        </script>
+                         
+                        <div style="clear:both"></div>  
+                     
+                </div> 
+                    <script>
+                        (function() {
+                            var loginbtn = $('#user_select_list li.logout a ').click(function(e) {
+                                e.preventDefault();
+                                var titleConfig = {
+                                    title: '确认',
+                                    content: '确定退出？',
+                                    cancel: '取消',
+                                    enter: '确定',
+                                    width: 358,
+                                    enterCb: function() {
+                                        window.location = loginbtn.attr('href');
+                                        return true;
+                                    }
+                                };
+                                IFCWin.confirm(titleConfig);
+                                return false;
+                            });
+                        })(); 
+                    </script> 
+<div class="content"> 
+  <div class="main_cont"> 
+    <div class="crumbs">
+	<ul>
+		<li class="current"><span class="lt"></span><em>系统设置</em></li>
+		<li class="last">交易管理</li>
+	</ul>
+</div>
+    <div class="main single_main" id="pageMain"> 
+    <div id="list" class="inner">
+        <div class="main_title">
+            <h1>交易管理</h1>
+        </div> 
+        <div class="gb_bd_border">
+             
+            <link rel="stylesheet" type="text/css" href="http://localhost/ifc_rtb_devs/themes/default/css/solution_adslotset.css" />
+<style>
+    .frm .buyer_type_item .account_edit_error { margin-left: 272px; clear: both; }
+    .servicemodel label{width: auto !important;}
+    .servicemodel h2 { display: block; float: left; width: 256px; padding-right: 15px; line-height: 26px; font-size: 12px; font-weight: bold; color: #6A6A6A; text-align: right; white-space: nowrap; }
+    .servicemodel h2 span { color: #f00; font: 0.8em Verdana;font-weight: bold; }
+    .item #Deal_Description { border: 1px solid #ABABAB; width: 287px; height: 126px; min-height: 126px; padding: 0.5em; resize: vertical; }
+</style>
+<br>
+
+<div class="frm sellerFrm">
+    <form target="formtarget" widget_type="form" id="dealForm" action="/ssp_new/admin/center/deal/create?dealType=5" method="post">    <div class="item">
+        <label for="RTBMappingWhite_DealType">交易类型：</label>       <select class="multiselect" data-bind="value:dealType, multiselect: { minWidth: 256 },event:{ change: changed}" _verify=" number" name="RTBMappingWhite[DealType]" id="RTBMappingWhite_DealType">
+<option value="3">优选交易</option>
+<option value="5">优先交易</option>
+</select>    </div>
+    <div class="item">
+        <label for="RTBMappingWhite_Name" class="required"><span class="required">*</span>交易名称：</label>        <input class="in_text" _verify=" required maxlength:60" name="RTBMappingWhite[Name]" id="RTBMappingWhite_Name" type="text" maxlength="60" />    </div>   
+    
+    <div data-bind="visible: dealType() >= '2' ? true : false">
+        <div class="item"><label class="in_text required" for="RTBMappingWhite_buyerName"><span class="required">*</span>买方名称：</label><input class="in_text" _verify="required" name="RTBMappingWhite[buyerName]" id="RTBMappingWhite_buyerName" type="text" /><input class="in_text" name="RTBMappingWhite[BuyerID]" id="RTBMappingWhite_BuyerID" type="hidden" /></div><script>        
+    ( function ( _data, _inputID , _hiddenInputID) {
+        var availableTags = _data;
+        $( "#"+_inputID ).autocomplete({
+          source: _data, 
+          select:  function(e,ui){
+                            $(this).val( ui.item.label );
+                            $( "#"+_hiddenInputID ).val(ui.item.value);
+                            return false;
+            },
+          change: function(e,ui){
+                            if ( ui.item ) {
+                                return false;
+                            }
+                            __app && __app.userValid(availableTags, "RTBMappingWhite_buyerName", "RTBMappingWhite_BuyerID");
+                            return false;
+			},
+          focus: function(e,ui){
+                            $(this).val( ui.item.label );
+                            $( "#"+_hiddenInputID ).val(ui.item.value);
+                            return false;
+            }
+        });
+    } )(
+    [{"value":"102","label":"mediamax-iclick"},{"value":"103","label":"mediamax-wisemedia"},{"value":"104","label":"mediamax-yoyi"},{"value":"106","label":"Allyes_TestBuyer"},{"value":"111","label":"mediamax-brandscreen"},{"value":"116","label":"mediamax-SMbuyer"},{"value":"118","label":"mediamax-hdt"},{"value":"122","label":"mediamax-mediav"},{"value":"126","label":"mediamax-pic"},{"value":"129","label":"mediamax-google"},{"value":"138","label":"mediamax-mediaadx"},{"value":"142","label":"mediamax-adsvanaHZ"},{"value":"143","label":"taobao-ifeng"},{"value":"145","label":"mediamax-biddingx"},{"value":"146","label":"mediamax-winmax"},{"value":"156","label":"mediamax-adsvanaGZ"},{"value":"172","label":"mediamax-youdao"},{"value":"173","label":"mediamax-baidu"},{"value":"174","label":"mediamax-dod"},{"value":"176","label":"mediamax-behe"},{"value":"182","label":"mediamax-buzzads"},{"value":"190","label":"mediamax-optaim"},{"value":"192","label":"mediamax-ipinyou"},{"value":"196","label":"mediamax-geotmt"},{"value":"207","label":"mediamax-emar"},{"value":"210","label":"mediamax-maysunmedia"},{"value":"212","label":"mediamax-paiyue"},{"value":"223","label":"youdaoaudit"},{"value":"224","label":"youdaoaudit"},{"value":"225","label":"mediamax-zhiziyun"},{"value":"235","label":"mediamax-adbroker"},{"value":"246","label":"test-SH"},{"value":"247","label":"mediamax-phorm"},{"value":"256","label":"wdbuyer1"},{"value":"257","label":"wdbuyer2"},{"value":"258","label":"w1"},{"value":"259","label":"w2"},{"value":"261","label":"test1"},{"value":"262","label":"test11"},{"value":"268","label":"r1"},{"value":"270","label":"ljtest_buyer01"},{"value":"271","label":"ljtest_buyer02"},{"value":"273","label":"lj_buyer01"},{"value":"274","label":"lj_buyer02"},{"value":"276","label":"yybuy"},{"value":"278","label":"yybuy2"},{"value":"279","label":"yybuy"},{"value":"280","label":"yybuy2"},{"value":"284","label":"wbuy1"},{"value":"285","label":"333"},{"value":"286","label":"wbuy2-34"},{"value":"288","label":"wbuyz1"},{"value":"297","label":"test23"},{"value":"298","label":"j1"},{"value":"299","label":"a12"},{"value":"302","label":"jj1"},{"value":"303","label":"testpq"},{"value":"305","label":"danbuyer"},{"value":"306","label":"w3"},{"value":"311","label":"linqiong"},{"value":"312","label":"buy"},{"value":"313","label":"buy33"},{"value":"314","label":"buy-z1"},{"value":"315","label":"buy33-z1"},{"value":"316","label":"buy-z2"},{"value":"317","label":"zz"},{"value":"319","label":"zz3"},{"value":"321","label":"zz4"},{"value":"322","label":"wdbuyer123"},{"value":"334","label":"$%$^%"},{"value":"337","label":"@##@\uff01"},{"value":"338","label":"testpq1"},{"value":"339","label":"testpq2"},{"value":"340","label":"mm-ricco"},{"value":"344","label":"s3"},{"value":"345","label":"testpq3"},{"value":"348","label":"www"},{"value":"349","label":"zaizhanghu1"},{"value":"350","label":"sd"},{"value":"351","label":"sdsds"},{"value":"352","label":"sd1"},{"value":"353","label":"dspbuyer1"},{"value":"354","label":"dspbuyer2"},{"value":"355","label":"dspbuyer3"},{"value":"356","label":"dspbuyer4"},{"value":"357","label":"dspbuyer5"},{"value":"358","label":"dspbuyer6"},{"value":"359","label":"dspbuyer7"},{"value":"360","label":"dspbuyer8"},{"value":"361","label":"dspbuyer9"},{"value":"362","label":"dspbuyer10"},{"value":"370","label":"qaz"},{"value":"371","label":"1"},{"value":"372","label":"qazfdf"},{"value":"373","label":"qaz54"},{"value":"375","label":"ds"},{"value":"376","label":"asdx"},{"value":"377","label":"asdx1"},{"value":"378","label":"asdx11"},{"value":"379","label":"qweds"},{"value":"380","label":"qweds1"},{"value":"381","label":"ljbuyer_auto_01"},{"value":"388","label":"mnlk"},{"value":"389","label":"poiu"},{"value":"390","label":"poiu1"},{"value":"391","label":"poiu12"},{"value":"392","label":"poiu123"},{"value":"393","label":"poiu1234"},{"value":"394","label":"poiu5"},{"value":"395","label":"poiu51"},{"value":"396","label":"poiu512"},{"value":"397","label":"poiu62"},{"value":"401","label":"dsf"},{"value":"402","label":"pjuk"},{"value":"403","label":"phghgjj"},{"value":"404","label":"pgfgh"},{"value":"409","label":"yybuy3"},{"value":"411","label":"gfhg"},{"value":"412","label":"fddfgh"},{"value":"413","label":"ertf"},{"value":"414","label":"poewe"},{"value":"415","label":"dfdfdf"},{"value":"417","label":"snow_b_s"},{"value":"418","label":"jojo123"},{"value":"419","label":"jojo12312"},{"value":"420","label":"ss_test"},{"value":"423","label":"ss_test1"},{"value":"424","label":"ss_test2"},{"value":"425","label":"ss_test3"},{"value":"426","label":"ss_test4"},{"value":"431","label":"test_key"},{"value":"434","label":"test_1"},{"value":"436","label":"testb"},{"value":"437","label":"wdbuyer3-del"},{"value":"441","label":"Allyes_TestBuyer_son"},{"value":"445","label":"tracy_buyer"},{"value":"455","label":"tracy_buyer1"},{"value":"457","label":"bella_buyer"},{"value":"458","label":"bella_buyer01"},{"value":"464","label":"tracy_buyer_sub"},{"value":"465","label":"tracy_buyer2"},{"value":"466","label":"tracy_buyer1_sub"},{"value":"467","label":"tracy_buyer3"},{"value":"472","label":"tracy_buyer1_sub1"},{"value":"474","label":"lj_buyer02_child02"},{"value":"475","label":"abc123"},{"value":"476","label":"tracy_buyer5"}], 'RTBMappingWhite_buyerName', 'RTBMappingWhite_BuyerID'
+    );
+  </script>   
+    </div>
+        <div class="item item_select">
+            <label for="RTBMappingWhite_MediaID" class="required"><span class="required">*</span>网站类型：</label>            
+            <select class="multiselect"   _verify=" required" name="RTBMappingWhite[siteType]" id="RTBMappingWhite_SiteType">
+                <option value="web">网站</option>
+                <option value="video">视频</option>
+                <option value="app">APP</option>
+            </select>        
+
+        </div>
+<style>
+.price{
+
+}
+.price-edit{
+    display:none;
+}
+</style>
+      <div class="item">
+        <label>选择广告位</label><input type="button" onclick="__app.adsSelectedDialog()" value="选择广告位">
+        <table>
+            <thead>
+                <tr>
+                <th>广告位</th>
+                <th>所属卖方</th>
+                <th>所属网站</th>
+                <th>所属频道</th>
+                <th>尺寸</th>
+                <th>底价</th>
+                <th>结算单价(元/CPM)</th>
+                <th>操作</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach:adsSelect" id="adsItems">
+                <tr>
+                    <td ><i data-bind="text:adSlotId"></i>
+                          <span data-bind="text:name"></span>
+                    </td>
+                    <td data-bind="text:sellName"></td>
+                    <td data-bind="text:site"></td>
+                    <td data-bind="text:channel"></td>
+                    <td data-bind="text:size"></td>
+                    <td data-bind="text:price"></td>
+                    <td >
+                        <div class="price"><span data-bind="text:settlement()==0?'未设置':settlement,css:{
+                        unset:settlement()==0}"></span>
+                        -<input type="button" value="设置" data-bind="click:$root.priceSetClick.bind($data,$index())">    
+                        </div>
+                        <div class="price-edit">
+                            <input type="text" name="price" data-bind="value:settlement">
+                            <input type="button" value="确定" data-bind="click:$root.priceSaveClick.bind($data,$index())">
+                            <input type="button" value="取消" data-bind="click:$root.priceCancelClick.bind($data,$index())">
+                        </div>
+                    </td>
+                    <td ><input type="button" value="del" data-bind="click:$root.remove"/></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>  
+
+
+
+    <div class="item servicemodel">
+                <h2>
+            <span class="required">*</span>服务模式：
+        </h2>
+        <input id="ytRTBMappingWhite_ServiceMode" type="hidden" value="" name="RTBMappingWhite[ServiceMode]" /><label><input _verify=" required number" id="RTBMappingWhite_ServiceMode_0" value="0" checked="checked" type="radio" name="RTBMappingWhite[ServiceMode]" /> <b>寄售</b></label><label><input _verify=" required number" id="RTBMappingWhite_ServiceMode_1" value="1" type="radio" name="RTBMappingWhite[ServiceMode]" /> <b>服务</b></label>    </div>
+    
+    <div class="frm_ft">
+        <div class="btn_group">
+            <input class="save_btn fl" type="submit" name="yt0" value="保存" />            <a class="cancel_btn fl" onclick="window.history.back(); return false;" href="javascript:void();">取消</a>        </div>
+    </div>
+    <input type="hidden" value="dealForm" name="form_id_flag" id="form_id_flag" /><input type="hidden" value="http://localhost/ssp_new/admin/center/deal/create" name="referrer" id="referrer" /></form>                <iframe name='formtarget' style="width:0;height:0;overflow:hidden;" width="0" height="0" frameBorder="0" ></iframe>
+                <script>$(function(){
+                    var _form = $("#dealForm");
+                    //console.log(_form);
+                    _form.find("p[id=moreInfo]").click(function(){
+                        if(_form.find("div[id=moreInfoDiv]").is(":hidden")){
+                            _form.find("div[id=moreInfoDiv]").show();
+                            $(this).html('<a class="add_closed" href="javascript:void(0)">关闭更多选项</a>');
+                        }else{
+                             _form.find("div[id=moreInfoDiv]").hide();
+                            $(this).html('<a href="javascript:void(0)">更多选项</a>');
+                        }
+                    });
+                });                $(function(){
+                    var _form = $("#dealForm");
+                    var $serverDealing = $('#serverdealing');
+                    if(!$serverDealing.size()){
+                        $serverDealing = $('<div class="fbdialog_win serverdealing" id="serverdealing">正在发送...</div>');
+                        $serverDealing.css({
+                            marginLeft: '-30px',
+                            marginTop:'-15px',
+                            width:'60px',
+                            height:'30px'
+                        }).appendTo('body').hide();
+                    }
+					var _validAjaxErrorQueueCount = function ( queue ){
+						var validCount= 0;
+						$.each(queue, function(i,itm){
+							if ( $( itm.itm ).is(':disabled') === false ) // skip disabled element.
+								validCount++;
+						});
+						return validCount;
+					};
+
+                    var ajaxErrorQueue = [];
+
+                    _form.validate({
+                        success:'ok',
+                        errorPlacement: function(error, element) {
+                            error.appendTo( element.closest(".item"));
+                        },
+                        submitHandler:function(form){
+                        $(form).find("input[type=submit]").attr("disabled",true);
+                            var form = form;
+                            if(_validAjaxErrorQueueCount( ajaxErrorQueue ) ){
+                                $.each(ajaxErrorQueue,function(i,itm){
+                                    _jpAjaxError(itm.itm,0,itm.error);
+                                });
+                                IFCWin.alert({title:'错误提示',content:'表单填写有错误！',cancel:'关闭'});
+                                $(form).find("input[type=submit]").attr("disabled",false);
+                                return;
+                            }
+                            
+                            form.submit();
+                            $(form).find("input[type=submit]").attr("disabled",false);
+                            $('#serverdealing').fadeIn();
+                        }
+                    });
+                    _form.welcomeInputLenStatus();
+                    _form.extendvalidate();
+                    _form.find('span.jp_tip').niceTitle({showLink: false, clickShow:'fast'});
+
+                    var _jpAjaxError = function(input,isOk,data){
+						var $input = $(input);
+						var id = $input.attr("id");
+                        if(isOk){
+                            $input.closest('.item').find('>label.error[for="'+id+'"]').addClass('ok');
+                        }else{
+                            $input.closest('.item').find('>label.error[for="'+id+'"]').removeClass('ok').html(data);
+                        }
+                    };
+					var _validRemotea = function(){
+                            var _self = this;
+                            var validator = $.data(_self.form, 'validator');
+                            if(!validator || !validator.check($(_self))) return;
+                            var v =$(this).val();
+                            var moduleUrl = $(this).attr('remotea');
+                            var defaultRecord = $(this).attr('updateRecord');
+                                                        var name = $(this).attr('name');
+                            v = $.trim(v);
+                            //转换编码。 不转换在IE下会出错
+                            v = encodeURI(v)
+
+                            $.ajax({
+                                url: moduleUrl,
+                                data: "name = " + name + "&value = " + v + "&defaultRecord = " + defaultRecord,
+                                type: "GET",
+                                dataType: "json",
+                                timeout: 30000,
+                                error: function(){
+
+                                },
+                                success: function(data){
+                                        if(!validator.check($(_self)))return;
+                                        if(data===true){
+                                                var newQueue = [];
+                                                _jpAjaxError(_self,1);
+                                                $.each(ajaxErrorQueue,function(i,itm){
+                                                    if(itm.itm != _self){
+                                                        newQueue.push({
+                                                                        itm:itm.itm,
+                                                                        ovalue:itm.ovalue,
+                                                                        error:itm.error
+                                                                    });
+                                                    }
+                                                });
+                                                ajaxErrorQueue.length = 0;
+                                                ajaxErrorQueue = newQueue;
+                                                newQueue = null;
+                                        }else{
+                                                _jpAjaxError(_self,0,data);
+
+                                                ajaxErrorQueue.push({
+                                                    itm:_self,
+                                                    ovalue:v,
+                                                    error:data
+                                                });
+                                        }
+                                }
+                            });
+                    };
+
+					 _form.bind('remotea.validatorForm', function () {
+						_form.find('input[remotea],select[remotea]').each(function (){
+							var $this = $(this);
+							if ( $this.data('remotea.validatorElement') ) return;
+							$this.blur( _validRemotea );
+							$this.data('remotea.validatorElement', true)
+						}); 
+					 });
+					 _form.trigger('remotea.validatorForm');
+
+                                        
+
+                    _form.bind('data-server-response',function(){
+                        var json =  arguments[1] || {};
+                        if(json.result){
+                            IFCWin.alert({title:'提示',content:json.msg,cancel:'关闭',cancelCb:function(){if(json.url)window.location.href = json.url;}});
+                        }else{
+                             IFCWin.alert({title:'提示',content:json.msg,cancel:'关闭'});
+                            _form.validate().showErrors(json.data);
+                        }
+                        //$(this).find("input[type=submit]").attr("disabled",false);
+                        if(ajaxErrorQueue) ajaxErrorQueue.length = 0;
+                    });
+
+                    if(!window.formCallBack)window.formCallBack ={};
+                    window.formCallBack['dealForm'] = function(data){
+                        $serverDealing.fadeOut('fast',function(){$(this).hide();});
+                        _form.trigger('data-server-response',data);
+                    };
+
+
+          });
+                </script>
+</div>
+
+<script type="text/ko-template" id="adSpaceTpl">
+<div class="ad_slot_picker" id="solution_ad_slot_picker">
+    <h2>选择广告位</h2>
+    <ul class="search_condition"> 
+        
+        <li class="item">
+            <b>卖方名称</b>
+            <input type="text" data-bind="value: search.sellName"> 
+        </li>        
+
+        <li class="item">
+            <b>网站名称</b>
+            <input type="text" data-bind="value: search.siteName"> 
+        </li>
+        <li class="item">
+            <b>频道名称</b>
+            <input type="text" data-bind="value: search.channelName"> 
+        </li> 
+        <li class="item">
+            <b>广告位ID</b>
+            <input type="text" data-bind="value: search.adsID"> 
+        </li> 
+
+        <li class="item">
+            <b>广告位名称</b>
+            <input type="text" data-bind="value: search.adsName"> 
+        </li>
+
+         <li class="item">
+            <b>广告位尺寸</b>
+            <input type="text" data-bind="value: search.size"> 
+        </li>
+
+
+
+        <li class="btnbar">
+            <button type="button" data-bind="click: btnEvent.filterList">搜索</button>
+        </li> 
+    </ul>
+    <div class="data_list">
+        <div class="unselected_list">
+            <div class="list_show">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="check_col"><input type="checkbox" class="check_all" data-bind="disable: list.unselected().length == 0, checked: status.checkAllOfUnselected, click: btnEvent.checkAllOfUnselected"></th>
+                            <th class="adslotid_col">广告位ID</th>
+                            <th class="site_col">广告位名称</th>
+                            <th class="channel_col">网站</th>
+                            <th class="position_col">频道</th>
+                            <th class="size_col">尺寸</th>
+                            <
+                        </tr> 
+                    </thead>
+                    <tbody>
+                        <!--ko foreach: list.unselected-->
+                        <tr>
+                            <td class="check_col"><input type="checkbox" class="check_item" data-bind="value: $root.genCustomData(ID, adSlotId), checked: $root.list.checkedOfUnSelectedList"></td>
+                            <td class="adslotid_col ellipsis" data-bind="text: adSlotId, attr:{title: adSlotId}"></td>
+                            <td class="site_col ellipsis" data-bind="text: name, attr:{title: name}"></td>
+                            <td class="channel_col ellipsis" data-bind="text: site, attr:{title: site}"></td>
+                            <td class="position_col" data-bind="text: channel"></td>
+                            <td class="size_col" data-bind="text: size"></td>
+
+                        </tr>
+                        <!--/ko-->
+                        <tr data-bind="if: 0 === list.unselected().length">
+                            <td colspan="6">-- 无数据 --</td>
+                        </tr>
+                    </tbody> 
+                </table>
+            </div>
+            <div class="pager_show">
+                <div class="turn_page">
+                    <ul id="pager" data-bind="html: list.pager.html, click: btnEvent.clickPage">
+                    </ul>
+                </div>
+                <div class="page_total">
+                    当前选中<b data-bind="text: list.checkedOfUnSelectedList().length"></b>项, 共有<b data-bind="text: list.pager.total"></b>项(16项/页)
+                </div>
+            </div>      
+        </div>
+        <div class="selected_list">
+            <div class="btns_shortcut">
+                <button type="checkbox" class="items_select" title="选中" data-bind="disable: status.selectIsDisable, click: btnEvent.selectItems"><b>选中</b></button>
+                <button type="checkbox" class="items_remove" title="移除" data-bind="disable: status.removeIsDisable, click: btnEvent.removeItems"><b>移除</b></button>
+            </div>
+            <ul class="items_show">
+                <li class="title">
+                    <span class="chk">
+                        <input type="checkbox" data-bind="disable: list.selected().length == 0, checked: status.checkAllOfSelected, click: btnEvent.checkAllOfSelected">
+                    </span>
+                    <b>已选中</b>
+                </li>
+            </ul>
+            <ul class="items_show selected" data-bind="foreach: list.selected"> 
+                <li class="item">
+                    <span class="chk">
+                        <input type="checkbox" data-bind="value: $data.ID, checked: $parent.list.checkedOfSelectedList">
+                        <input type="hidden" name="TaxonomyAdSpace[ConditionValue][]" data-bind="value: $data.ID">
+                    </span>
+                    <b data-bind="text: $data.adSlotId, attr:{title: $data.adSlotId}"></b>
+                </li> 
+            </ul>
+            <div class="pager_show">
+                <div class="page_total">
+                    当前选中<b data-bind="text: list.checkedOfSelectedList().length"></b>项, 共有<b data-bind="text: list.selected().length"></b>项
+                </div>
+            </div>      
+        </div>
+    </div>  
+
+</script>
+
+
+<script type="text/ko-template" id="adSpaceTpl_app">
+<div class="ad_slot_picker" id="solution_ad_slot_picker">
+    <h2>选择广告位</h2>
+    <ul class="search_condition"> 
+        <li class="item">
+            <b>网站</b>
+            <input type="text" data-bind="value: search.site"> 
+        </li>
+        <li class="btnbar">
+            <button type="button" data-bind="click: btnEvent.filterList">搜索</button>
+        </li> 
+    </ul>
+    <div class="data_list">
+        <div class="unselected_list">
+            <div class="list_show">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="check_col"><input type="checkbox" class="check_all" data-bind="disable: list.unselected().length == 0, checked: status.checkAllOfUnselected, click: btnEvent.checkAllOfUnselected"></th>
+                            <th class="adslotid_col">广告位ID</th>
+                            <th class="site_col">网站</th>
+                            <th class="channel_col">频道</th>
+                            <th class="size_col">尺寸</th>
+                            <th class="position_col">位置</th>
+                        </tr> 
+                    </thead>
+                    <tbody>
+                        <!--ko foreach: list.unselected-->
+                        <tr>
+                            <td class="check_col"><input type="checkbox" class="check_item" data-bind="value: $root.genCustomData(ID, adSlotId), checked: $root.list.checkedOfUnSelectedList"></td>
+                            <td class="adslotid_col ellipsis" data-bind="text: adSlotId, attr:{title: adSlotId}"></td>
+                            <td class="site_col ellipsis" data-bind="text: site, attr:{title: site}"></td>
+                            <td class="channel_col ellipsis" data-bind="text: channel, attr:{title: channel}"></td>
+                            <td class="size_col" data-bind="text: size"></td>
+                            <td class="position_col" data-bind="text: position"></td>
+                        </tr>
+                        <!--/ko-->
+                        <tr data-bind="if: 0 === list.unselected().length">
+                            <td colspan="6">-- 无数据 --</td>
+                        </tr>
+                    </tbody> 
+                </table>
+            </div>
+            <div class="pager_show">
+                <div class="turn_page">
+                    <ul id="pager" data-bind="html: list.pager.html, click: btnEvent.clickPage">
+                    </ul>
+                </div>
+                <div class="page_total">
+                    当前选中<b data-bind="text: list.checkedOfUnSelectedList().length"></b>项, 共有<b data-bind="text: list.pager.total"></b>项(16项/页)
+                </div>
+            </div>      
+        </div>
+        <div class="selected_list">
+            <div class="btns_shortcut">
+                <button type="checkbox" class="items_select" title="选中" data-bind="disable: status.selectIsDisable, click: btnEvent.selectItems"><b>选中</b></button>
+                <button type="checkbox" class="items_remove" title="移除" data-bind="disable: status.removeIsDisable, click: btnEvent.removeItems"><b>移除</b></button>
+            </div>
+            <ul class="items_show">
+                <li class="title">
+                    <span class="chk">
+                        <input type="checkbox" data-bind="disable: list.selected().length == 0, checked: status.checkAllOfSelected, click: btnEvent.checkAllOfSelected">
+                    </span>
+                    <b>已选中</b>
+                </li>
+            </ul>
+            <ul class="items_show selected" data-bind="foreach: list.selected"> 
+                <li class="item">
+                    <span class="chk">
+                        <input type="checkbox" data-bind="value: $data.ID, checked: $parent.list.checkedOfSelectedList">
+                        <input type="hidden" name="TaxonomyAdSpace[ConditionValue][]" data-bind="value: $data.ID">
+                    </span>
+                    <b data-bind="text: $data.adSlotId, attr:{title: $data.adSlotId}"></b>
+                </li> 
+            </ul>
+            <div class="pager_show">
+                <div class="page_total">
+                    当前选中<b data-bind="text: list.checkedOfSelectedList().length"></b>项, 共有<b data-bind="text: list.selected().length"></b>项
+                </div>
+            </div>      
+        </div>
+    </div>  
+
+</script>
+
+<script src="data.js"></script>
+
+<script>
+    ;(function() {
+        __app.init("1", data, "");
+        __app.ready();
+
+    })();
+
+</script>        </div>
+    </div>
+</div> 
+  </div>
+</div>       
+				</div> 
+			</div> 
+
+			<div class="gb_footer">
+				<div class="inner">
+			        <nav><a href="http://mediamax.quantone.com/about/index.html">关于我们</a>|<a href="http://mediamax.quantone.com/contact/index.html">联系我们</a>|<a href="http://mediamax.quantone.com/home/help">帮助中心</a></nav>
+			        <p>Copyright©1998-2013 www.quantone.com All Rights Reserved.<span>沪ICP备14001982号</span>
+			        	<a href="http://sh.cyberpolice.cn/infoCategoryListAction.do?act=initjpg" target="_blank">
+			        		<img src="/ssp_new/images/police001.png" />
+			        	</a>
+			            <a href="http://www.zx110.org" target="_blank"><img src="/ssp_new/images/police002.png" /></a>
+			            <a href="http://www.zx110.org/cxs/index.html" target="_blank"><img src="/ssp_new/images/police003.png" /></a>
+			        </p>
+			    </div>
+			</div>
+
+	<script type="text/javascript" src="/ssp_new/themes/default/js/page.ready.js"></script>
+</body>
+</html> 

@@ -1,0 +1,125 @@
+<!DOCTYPE html style="transform: translateZ(0px);">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+#container{
+	width:500px;
+	height:200px;
+	background: red;
+}
+#test1{
+	width:200px;
+	height: 1800px;
+	background: #cccccc;
+/* 	opacity: 0.5;
+ */
+}
+#test2{
+	top:-500px;
+	border:1px solid;
+	width:500px;
+	height: 200px;
+	background: #745E52;
+	position: absolute;
+}
+#chartsContainer{
+	position: fixed;
+	top:100px;
+	overflow: scroll;
+}
+#frame_count{
+	width:600px;
+	height: 200px;
+	background: #efefef;
+}
+</style>
+</head>
+<body>
+
+<div id="frame_count">
+
+</div>
+<script>
+// rAF
+window.requestAnimationFrame = function() {
+	return window.requestAnimationFrame ||
+		window.webkitRequestAnimationFrame ||
+		window.mozRequestAnimationFrame ||
+		window.msRequestAnimationFrame ||
+		window.oRequestAnimationFrame ||
+		function(f) {
+			window.setTimeout(f,1e3/60);
+		}
+}();
+
+var $ = document.querySelector.bind(document);
+
+
+var fps = 30;
+var now;
+var then = Date.now();
+var interval = 1000/fps;
+var delta;
+
+// For this demo
+var counter = 0;
+var first = then;
+
+/*var second_since = Date.now();
+var second = 0;
+var second_fps = 0;*/
+ 
+function draw() {
+	
+	// Calculating REAL FPS
+	/*if (second > 1000) {
+		second_since = Date.now();
+		second = 0;
+		
+		console.log(second_fps);
+		
+		second_fps = 0;
+	}
+	else {
+		second = Date.now() - second_since;
+		++second_fps;
+	}*/
+	
+	requestAnimationFrame(draw);
+	
+	now = Date.now();
+	delta = now - then;
+	//console.log(delta);
+	
+	if (delta > interval) {
+		// update time stuffs
+		
+		// Just `then = now` is not enough.
+		// Lets say we set fps at 10 which means
+		// each frame must take 100ms
+		// Now frame executes in 16ms (60fps) so
+		// the loop iterates 7 times (16*7 = 112ms) until
+		// delta > interval === true
+		// Eventually this lowers down the FPS as
+		// 112*10 = 1120ms (NOT 1000ms).
+		// So we have to get rid of that extra 12ms
+		// by subtracting delta (112) % interval (100).
+		// Hope that makes sense.
+		
+		then = now - (delta % interval);
+		
+		// ... Code for Drawing the Frame ...
+		var time_el = (then - first)/1000;
+		++counter;
+		var fpss = parseInt(counter/time_el);
+		//$('#frame_count').innerHTML = ++counter + 'f / ' + parseInt(time_el) + 's = ' + parseInt(counter/time_el) + 'fps';
+		console.log('fps',fpss,counter,parseInt(time_el)+'f');
+		$('#frame_count').innerHTML =counter + 'f / '+ parseInt(time_el) + 's = '+fpss;
+	}
+}
+ 
+draw();
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<html>
+<head>
+
+</head>
+<body>
+<script>
+var aa = (function(){
+	var data={};
+	console.log(this);
+	var init=function(_data){
+		this.data = _data;
+		this.data.aa='aa';
+		console.log(this);
+	};
+	return {
+		data:data,
+		init:init
+	}
+})();
+
+aa.init({a:'a',b:'b',c:'c'});
+console.log(aa.data);
+</script>
+</body>
+</html>
