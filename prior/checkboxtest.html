@@ -1,0 +1,47 @@
+<html>
+<head>
+</head>
+<body>
+<div>
+<ul data-bind="foreach:list">
+	<li>
+	<input type="checkbox" data-bind="value:ID,checked:$parent.selected,checkedValue:ID" >
+	<span data-bind="text:text"></span>
+	</li>
+</ul>
+</div>
+<script src="http://localhost/ssp_new4/js/libs/knockout-2.2.1.js"></script>
+<script>
+var data={
+	"result": 1,
+	"data": {
+		"list": [{
+		        "ID":"21",
+		        "text":"所有访问过官网的人群"
+			}, {
+		        "ID":"22",
+ 				"text":"所有访问过官网的人群2"
+			}, {
+		        "ID":"23",
+ 				"text":"所有访问过官网的人群3"
+			}, {
+		        "ID":"24",
+ 				"text":"所有访问过官网的人群4"
+			}, {
+		        "ID":"25",
+ 				"text":"所有访问过官网的人群5"
+			}, {
+		        "ID":"26",
+ 				"text":"所有访问过官网的人群6"
+			}
+		]
+	}
+};
+var vm = {
+	list:ko.observableArray(data.data.list),
+	selected:ko.observableArray()
+}
+ko.applyBindings(vm);
+</script>
+</body>
+</html>
