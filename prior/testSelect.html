@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html >
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<link rel="stylesheet" type="text/css" href="/ssp_new4/themes/default/css/plugins/jquery-ui1.8.21.css" />
+<link rel="stylesheet" type="text/css" href="/ssp_new4/css/plugins/jquery.multiselect.css" />
+<link rel="stylesheet" type="text/css" href="/ssp_new4/css/plugins/jquery.multiselect.filter.css" />
+<script type="text/javascript" src="/ssp_new4/assets/945023b5/jquery.js"></script>
+<script type="text/javascript" src="/ssp_new4/assets/945023b5/jui/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/ssp_new4/js/jquery.ui.extend.js"></script>
+<script type="text/javascript" src="/ssp_new4/js/plugins/jquery.multiselect.js"></script>
+<script type="text/javascript" src="/ssp_new4/js/plugins/jquery.multiselect.filter.js"></script>
+
+
+</head>
+<body>
+	  <select name="aaa" id="aaa" style="width:500px" class="multiselectfilter">
+		<option value="a">aaaaaaaaaa</option>
+		<option value="b">baaaaaaa</option>
+		<option value="c">caaaaaaa</option>
+		<option value="d">daaaaaaa</option>
+    </select>
+
+	  <select name="bbb" id="aaa" style="width:500px" class="multiselectfilter">
+		<option value="a">aaaaaaaaaa</option>
+		<option value="b">baaaaaaa</option>
+		<option value="c">caaaaaaa</option>
+		<option value="d">daaaaaaa</option>
+    </select>
+
+  	  <select name="ccc" id="aaa" style="width:500px" class="multiselectfilter">
+		<option value="a">aaaaaaaaaa</option>
+		<option value="b">baaaaaaa</option>
+		<option value="c">caaaaaaa</option>
+		<option value="d">daaaaaaa</option>
+    </select>  
+<script>
+$('.multiselectfilter').multiselect('destroy').multiselect({header: true}).multiselectfilter();
+
+</script>
+
+</body>
+</html>
