@@ -1,0 +1,50 @@
+ 
+.qt-mm-native-ads {
+	background-color: #fff; 
+	border: 1px solid #efefef;
+	clear: both;
+	margin: 0 auto;
+	padding: 0;
+	box-sizing: border-box;
+}
+.qt-mm-native-ads a {
+	text-decoration: none;
+	color: #000;
+}
+.qt-mm-native-ads a:hover {
+	text-decoration: underline;
+}
+.qt-mm-native-ads .qt-mm-native-ads-body a:hover {
+	text-decoration: none;
+}
+.qt-mm-native-ads-header {
+	height: 52px;
+	margin: 0;
+}
+.qt-mm-native-ads-header img {
+	float: left;
+	vertical-align: middle;
+	border: none;
+}
+.qt-mm-native-ads-header h3 {
+	margin: 0;
+	font-size: 16px;
+}
+.qt-mm-native-ads-header em {
+	font-size: 12px;
+	font-style: normal;
+	color: #999;
+}
+.qt-mm-native-ads-body {
+	clear: both;
+	margin: -1px auto 0;
+	padding: 0;
+	float: left;
+}
+.qt-mm-native-ads-body img {
+	display: block;
+	border: none;
+}
+.qt-mm-native-ads-body button {
+	margin: 5px 0;
+}
