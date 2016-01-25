@@ -1,5 +1,4 @@
-
-/*{
+{
 	"result": 1,
 	"data": {
 		"count": 29,
@@ -23,21 +22,23 @@
 			"targetUrl": "http://allyes.com",
 			"type": 600,
 			"vocation": "化妆浴室用品类-化妆品护肤品",
-			"width": 980，
-			"native":{
+			"width": 980,
+			"native": {
+				"clkurl": "http://suning.com",
+
 				"logourl": "",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "960",
+					"h": "640",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
 			}
-		  }, {
+		}, {
 			"buyer": "lj_buyer02",
 			"code": "",
 			"creative": "/ssp_new4/admin/creative/preview/listView?id=11111139",
@@ -53,16 +54,16 @@
 			"targetUrl": "http://renren.com\u0001baidu.com",
 			"type": 600,
 			"vocation": "IT产品类-全部",
-			"width": 620，
-			"native":{
+			"width": 620,
+			"native": {
 				"logourl": "",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "600",
+					"h": "500",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -83,16 +84,18 @@
 			"targetUrl": "",
 			"type": 600,
 			"vocation": "IT产品类-电脑",
-			"width": 1300，
-			"native":{
+			"width": 1300,
+			"native": {
+				"clkurl": "http://suning.com",
+
 				"logourl": "",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "1280",
+					"h": "720",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -113,16 +116,18 @@
 			"targetUrl": "",
 			"type": 600,
 			"vocation": "IT产品类-电脑",
-			"width": 620，
-			"native":{
+			"width": 620,
+			"native": {
+				"clkurl": "http://suning.com",
+
 				"logourl": "",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "600",
+					"h": "200",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -143,16 +148,18 @@
 			"targetUrl": "",
 			"type": 600,
 			"vocation": "消费类电子类-电视机",
-			"width": 740，
-			"native":{
+			"width": 740,
+			"native": {
+				"clkurl": "http://suning.com",
+
 				"logourl": "",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "720",
+					"h": "405",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -173,16 +180,18 @@
 			"targetUrl": "",
 			"type": 600,
 			"vocation": "IT产品类-电脑配件",
-			"width": 160，
-			"native":{
+			"width": 160,
+			"native": {
+				"clkurl": "http://suning.com",
+
 				"logourl": "",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "150",
+					"h": "200",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -203,16 +212,18 @@
 			"targetUrl": "http://http://www.allyes1.com\u0001http://www.allyes2.com",
 			"type": 600,
 			"vocation": "IT产品类-电脑",
-			"width": 210，
-			"native":{
+			"width": 210,
+			"native": {
+				"clkurl": "http://suning.com",
+
 				"logourl": "",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "200",
+					"h": "150",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -233,16 +244,18 @@
 			"targetUrl": "http://http://www.allyes1.com\u0001http://www.allyes2.com",
 			"type": 600,
 			"vocation": "IT产品类-电脑",
-			"width": 210，
-			"native":{
+			"width": 210,
+			"native": {
+				"clkurl": "http://suning.com",
+
 				"logourl": "",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "200",
+					"h": "200",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -263,16 +276,18 @@
 			"targetUrl": "http://http://www.allyes1.com\u0001http://www.allyes2.com",
 			"type": 600,
 			"vocation": "IT产品类-电脑",
-			"width": 425，
-			"native":{
+			"width": 425,
+			"native": {
+				"clkurl": "http://suning.com",
+
 				"logourl": "",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "405",
+					"h": "720",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -293,16 +308,18 @@
 			"targetUrl": "http://http://www.allyes1.com\u0001http://www.allyes2.com",
 			"type": 600,
 			"vocation": "IT产品类-电脑",
-			"width": 310，
-			"native":{
+			"width": 310,
+			"native": {
+				"clkurl": "http://suning.com",
+
 				"logourl": "",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "300",
+					"h": "250",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -323,16 +340,18 @@
 			"targetUrl": "",
 			"type": 600,
 			"vocation": "IT产品类-电脑",
-			"width": 740，
-			"native":{
+			"width": 740,
+			"native": {
+				"clkurl": "http://suning.com",
+
 				"logourl": "",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "720",
+					"h": "360",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -353,16 +372,18 @@
 			"targetUrl": "",
 			"type": 600,
 			"vocation": "IT产品类-电脑配件",
-			"width": 740，
-			"native":{
+			"width": 740,
+			"native": {
+				"clkurl": "http://suning.com",
+
 				"logourl": "",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "720",
+					"h": "240",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -383,16 +404,18 @@
 			"targetUrl": "",
 			"type": 600,
 			"vocation": "IT产品类-电脑",
-			"width": 620，
-			"native":{
+			"width": 620,
+			"native": {
+				"clkurl": "http://suning.com",
+
 				"logourl": "",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "600",
+					"h": "500",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -413,18 +436,20 @@
 			"targetUrl": "",
 			"type": 601,
 			"vocation": "消费类电子类-影音播放机",
-			"width": 1300，
-			"native":{
-				"logourl": "",
+			"width": 1300,
+			"native": {
+				"clkurl": "http://suning.com",
+
+				"logourl": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-logo.png",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "1280",
+					"h": "720",
 					"clkurl": "http://www.suning.com/",
-					"btnname": "有货"
+					"btnname": "点击下载"
 				}
 			}
 		}, {
@@ -443,16 +468,18 @@
 			"targetUrl": "",
 			"type": 601,
 			"vocation": "IT产品类-电脑外围设备",
-			"width": 620，
-			"native":{
-				"logourl": "",
+			"width": 620,
+			"native": {
+				"clkurl": "http://suning.com",
+
+				"logourl": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-logo.png",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "600",
+					"h": "200",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -473,16 +500,18 @@
 			"targetUrl": "",
 			"type": 601,
 			"vocation": "消费类电子类-音响设备",
-			"width": 740，
-			"native":{
-				"logourl": "",
+			"width": 740,
+			"native": {
+				"clkurl": "http://suning.com",
+
+				"logourl": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-logo.png",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "720",
+					"h": "405",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -503,16 +532,18 @@
 			"targetUrl": "",
 			"type": 601,
 			"vocation": "消费类电子类-影音播放机",
-			"width": 340，
-			"native":{
-				"logourl": "",
+			"width": 340,
+			"native": {
+				"clkurl": "http://suning.com",
+
+				"logourl": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-logo.png",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "150",
+					"h": "200",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -533,16 +564,18 @@
 			"targetUrl": "",
 			"type": 601,
 			"vocation": "消费类电子类-影音播放机",
-			"width": 340，
-			"native":{
-				"logourl": "",
+			"width": 340,
+			"native": {
+				"clkurl": "http://suning.com",
+
+				"logourl": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-logo.png",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "200",
+					"h": "150",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -563,16 +596,19 @@
 			"targetUrl": "",
 			"type": 601,
 			"vocation": "IT产品类-电脑配件",
-			"width": 340，
-			"native":{
-				"logourl": "",
+			"width": 340,
+			"native": {
+				"clkurl": "http://suning.com",
+
+				"logourl": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-logo.png",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+
+					"w": "200",
+					"h": "200",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -593,16 +629,18 @@
 			"targetUrl": "",
 			"type": 601,
 			"vocation": "消费类电子类-电视机",
-			"width": 425，
-			"native":{
-				"logourl": "",
+			"width": 425,
+			"native": {
+				"clkurl": "http://suning.com",
+
+				"logourl": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-logo.png",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "405",
+					"h": "720",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -623,16 +661,18 @@
 			"targetUrl": "",
 			"type": 601,
 			"vocation": "IT产品类-电脑配件",
-			"width": 340，
-			"native":{
-				"logourl": "",
+			"width": 340,
+			"native": {
+				"clkurl": "http://suning.com",
+
+				"logourl": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-logo.png",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "300",
+					"h": "250",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -653,16 +693,18 @@
 			"targetUrl": "",
 			"type": 601,
 			"vocation": "医疗服务类-医院",
-			"width": 740，
-			"native":{
-				"logourl": "",
+			"width": 740,
+			"native": {
+				"clkurl": "http://suning.com",
+
+				"logourl": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-logo.png",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "720",
+					"h": "360",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -683,16 +725,18 @@
 			"targetUrl": "",
 			"type": 601,
 			"vocation": "医疗服务类-医院",
-			"width": 740，
-			"native":{
-				"logourl": "",
+			"width": 740,
+			"native": {
+				"clkurl": "http://suning.com",
+
+				"logourl": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-logo.png",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "720",
+					"h": "240",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -713,16 +757,18 @@
 			"targetUrl": "",
 			"type": 601,
 			"vocation": "医疗服务类-医院",
-			"width": 620，
-			"native":{
-				"logourl": "",
+			"width": 620,
+			"native": {
+				"clkurl": "http://suning.com",
+
+				"logourl": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-logo.png",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "600",
+					"h": "500",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -743,16 +789,18 @@
 			"targetUrl": "",
 			"type": 601,
 			"vocation": "网络服务类-网络游戏",
-			"width": 1300，
-			"native":{
-				"logourl": "",
+			"width": 1300,
+			"native": {
+				"clkurl": "http://suning.com",
+
+				"logourl": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-logo.png",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "1280",
+					"h": "720",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -773,16 +821,18 @@
 			"targetUrl": "",
 			"type": 601,
 			"vocation": "IT产品类-全部",
-			"width": 620，
-			"native":{
-				"logourl": "",
+			"width": 620,
+			"native": {
+				"clkurl": "http://suning.com",
+
+				"logourl": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-logo.png",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "600",
+					"h": "200",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -803,16 +853,18 @@
 			"targetUrl": "",
 			"type": 601,
 			"vocation": "消费类电子类-电视机",
-			"width": 740，
-			"native":{
-				"logourl": "",
+			"width": 740,
+			"native": {
+				"clkurl": "http://suning.com",
+
+				"logourl": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-logo.png",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "720",
+					"h": "405",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -833,16 +885,18 @@
 			"targetUrl": "",
 			"type": 601,
 			"vocation": "IT产品类-全部",
-			"width": 340，
-			"native":{
-				"logourl": "",
+			"width": 340,
+			"native": {
+				"clkurl": "http://suning.com",
+
+				"logourl": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-logo.png",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "150",
+					"h": "200",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
@@ -863,20 +917,22 @@
 			"targetUrl": "",
 			"type": 601,
 			"vocation": "消费类电子类-家电企业形象",
-			"width": 340，
-			"native":{
-				"logourl": "",
+			"width": 340,
+			"native": {
+				"clkurl": "http://suning.com",
+
+				"logourl": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-logo.png",
 				"title": "苏宁易购",
 				"stitle": "苏宁电器旗下新一代B2C网上购物平台",
 				"desc": "是苏宁电器旗下新一代B2C网上购物平台（www.suning.com）。现已覆盖传统家电、3C电器、日用百货等品类",
 				"image": {
-					"url": "/images/nativeTeamplate/sn-image.jpg",
-					"w": "",
-					"h": "",
+					"url": "http://localhost/ssp_new4/themes/default/images/nativeTeamplate/sn-image.jpg",
+					"w": "200",
+					"h": "150",
 					"clkurl": "http://www.suning.com/",
 					"btnname": "有货"
 				}
 			}
 		}]
 	}
-}*/
+}

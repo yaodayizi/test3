@@ -20,7 +20,7 @@ $nativeTeamplateConfig = array(
 	3=>array('padding' =>20,'minWidth'=>320,'addHeight'=>90)
 );
 
-$nativeSize = $nativeSize = array(
+/*$nativeSize = $nativeSize = array(
     '600' => array(
         '960*640' => array(
             'w' => 980,'h' => 730
@@ -74,7 +74,7 @@ $nativeSize = $nativeSize = array(
             'w' => 740,'h' => 386
         )
     )
-   );
+   );*/
 
 
 function getTemplatePath($type,$width,$height){
@@ -95,14 +95,24 @@ function getTemplatePath($type,$width,$height){
 
 } 
 
-function getWidth($width,$minWidth,$padding){
+function getWidth($width,$minWidth,$padding,$height,$type){
+
+		if($type == 600){
+			$ratio = $width / $height;
+			if($ratio >= 0.75 && $width < 400){
+				
+				$reWidth = $width * 2.24 +$padding;
+				echo 'scale:'.$reWidth.' ';
+				return $reWidth;
+			}
+		}
 
 		return $minWidth > 0 && $width < $minWidth ?  $minWidth + $padding :  $width + $padding;
 }
 
 
 
-function getTemplateSize($type,$width,$height)
+function getTemplateSize($type,$width,$height,$type)
 {
 	global $nativeTeamplateConfig;
 	echo $type.' '.$width.' '.$height.'<br>';
@@ -110,7 +120,7 @@ function getTemplateSize($type,$width,$height)
 	//echo $teamplateNum.' |';
 	$size = array('w'=>'0','h'=>'0');
 	$config = $nativeTeamplateConfig[$teamplateNum];
-	$size['w'] = getWidth($width,$config['minWidth'],$config['padding']);
+	$size['w'] = getWidth($width,$config['minWidth'],$config['padding'],$height,$type);
 	
 	//var_dump($config);
 	$size['h'] = $height + $config['addHeight'];
@@ -119,7 +129,7 @@ function getTemplateSize($type,$width,$height)
 
 }
 
-/*$nativeTeamplateSize;
+$nativeTeamplateSize;
 $typeArr = array(600,601);
 for($i=0;$i<2;$i++)
 {
@@ -127,11 +137,11 @@ for($i=0;$i<2;$i++)
 	foreach ($nativeImgSize as $key => $value) {
 		//var_dump($value);
 
-		$nativeTeamplateSize[$typeArr[$i]][$key]  = getTemplateSize($typeArr[$i],$value['w'],$value['h']);
+		$nativeTeamplateSize[$typeArr[$i]][$key]  = getTemplateSize($typeArr[$i],$value['w'],$value['h'],$typeArr[$i]);
 	}
 }
 
-print_r($nativeTeamplateSize);*/
+//print_r($nativeTeamplateSize);
 //var_dump($nativeSize);
-echo json_encode($nativeSize,true);
+echo json_encode($nativeTeamplateSize,true);
 ?>
