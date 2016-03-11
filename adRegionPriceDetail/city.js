@@ -37,7 +37,7 @@ var cityData = {
 					{"id":"wbzdsj3","label":"我编造3","level":0},
 					{"id":"wbzdsj4","label":"我编造4","level":0},
 					{"id":"wbzdsj5","label":"我编造5","level":0},
-					{"id":"wbzdsj6","label":"我编造6","level":0},
+					{"id":"wbzdsj6","label":"我编造6","level":0}
 				]
 			}, {
 				"id": "CNHETS",
