@@ -1,0 +1,329 @@
+<!doctype html>
+<meta charset="utf8">
+<style>
+	body{
+		font-size: 12px;
+	}
+
+</style>
+
+<body>
+<style>
+	.role-settings-tree b{
+		font-weight: normal;
+	}
+	.role-settings-tree i{
+		font-style: normal;
+	}
+	.role-settings-tree ul,
+	.role-settings-tree li{
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.role-settings-tree li{
+		margin: 3px 0 3px 16px;
+
+	}
+	.role-settings-tree .item-checkbox{
+		float: left;
+		width: 16px;
+		height: 16px;
+		background-color: gray;
+	}
+	.role-settings-tree .item-checkbox.partial{
+		background-color: blue;
+	}
+	.role-settings-tree .item-checkbox.all{
+		background-color: red;
+	}
+
+	.role-settings-tree .item-checkbox,
+	.role-settings-tree .item-name{
+		cursor: pointer;
+	}
+</style>
+<script type="text/ko-template" id="roleItemTpl">
+    <li>
+        <div class="item-info">
+            <b class="item-checkbox" data-bind="css:{ 'partial': checkedStatus() == 'partial', 'none': checkedStatus() == 'none','all': checkedStatus() == 'all' }, click: $root.nodeClick "></b>
+            <i class="item-name" data-bind="text: label, click: $root.nodeClick "></i>
+            <span class="items-total">(<i data-bind="text: leafNodeCheckedCount"></i>/<b data-bind="text: leafNodeCount"></b>)</span>
+        </div>
+        <ul data-bind="foreach: children">
+            <!--ko if: node-->
+            <!--ko template: { foreach: $data, name: 'roleItemTpl' }-->
+            <!--/ko-->
+            <!--/ko-->
+            <!--ko ifnot: node-->
+            <li>
+                <label>
+                	<input type="checkbox" data-bind="checked: checked, value: id">
+                	<b data-bind="text: label"></b>
+                </label>
+            </li>
+            <!--/ko-->
+        </ul>
+    </li>
+</script>
+    <ul id="roleSettingContainer" class="role-settings-tree" data-bind="template: { foreach: roleSetting, name: 'roleItemTpl' }"></ul>
+    
+    <script type="text/javascript" src="./knockout-2.2.1.js"></script>
+    <script type="text/javascript" src="./knockout.mapping.min.js"></script>
+    <script type="text/javascript">
+    var r = [{
+        id: "1",
+        label: "我的广告",
+        children: [{
+            id: '10',
+            label: '我的计划',
+            children: [{
+                id: '101',
+                label: '新建'
+            }, {
+                id: '102',
+                label: '编辑'
+            }]
+        }, {
+            id: '11',
+            label: '我的策略',
+            children: [{
+                id: '111',
+                label: '新建'
+            }]
+        }]
+    }, {
+        id: "2",
+        label: "报表",
+        children: [{
+            id: '20',
+            label: '每日报表',
+            children: [{
+                id: '201',
+                label: '新建'
+            }, {
+                id: '202',
+                label: '编辑'
+            }]
+        }]
+    }];
+
+    var s = ["101"];
+    </script>
+    <script type="text/javascript">
+    (function() {
+        var ROOT_ID = "";
+        var PARENTS_KEY = "__parents__"; 
+
+        var extentParentsKey = function(o, v) {
+            if (!o[PARENTS_KEY])
+                o[PARENTS_KEY] = v || [];
+        };
+
+        var arrParents = function(arry, pushItem) {
+            var _new = [];
+            _new.push.apply(_new, arry);
+            _new.push(pushItem);
+            return _new;
+        }; 
+
+        var nodeInstance = function(node, parentNode) {
+            node.node = true;
+            node.children = ko.observableArray(node.children);
+            node.leafNodeCount = ko.observable(0);
+            node.leafNodeCheckedCount = ko.observable(0);
+            node.checkedStatus = ko.computed(function() {
+                var checked = node.leafNodeCheckedCount(),
+                    total = node.leafNodeCount();
+                if (checked > 0 && total > 0) {
+                    if (checked != total)
+                        return "partial";
+                    return "all";
+                }
+                return "none";
+            }, 50);
+
+            node.checked = ko.computed(function() {
+                return node.leafNodeCount() == node.leafNodeCheckedCount() && node.leafNodeCount() > 0;
+            }, 50);
+
+            node.leafNodeCheckedCount.subscribe(function() {
+                if (!parentNode)
+                    return;
+                var children = parentNode.children();
+                var count = 0;
+                ko.utils.arrayForEach(children, function(sibling) {
+                    count += sibling.leafNodeCheckedCount();
+                });
+                parentNode.leafNodeCheckedCount(count);
+            });
+
+            node.leafNodeCount.subscribe(function() {
+                if (!parentNode)
+                    return;
+                var children = parentNode.children();
+                var count = 0;
+                ko.utils.arrayForEach(children, function(sibling) {
+                    count += sibling.leafNodeCount();
+                });
+                parentNode.leafNodeCount(count);
+            });
+
+
+        };
+
+        var leafInstance = function(node, parentNode) {
+            node.node = false;
+            node.checked = ko.observable(false);
+            node.checked.subscribe(function(b) {
+                if (!parentNode)
+                    return;
+                var step = b ? 1 : -1;
+                var b = parentNode.leafNodeCheckedCount();
+                parentNode.leafNodeCheckedCount(b + step);
+            });
+        };
+
+
+        var genVM = function(treeData, selectedData){
+			treeData = treeData || {};        	
+        	selectedData = selectedData || []; 
+
+	        // For leaf nodes handler.
+	        var mapUtil = {
+	        	map_: {},
+	        	checkedLeafNode: function( nodeId, checked ){
+	    			if( nodeId == undefined )
+	    				return false;
+	    			checked = checked == undefined ? true : !!checked;
+	    			var map = mapUtil.map_;
+	    			// Leaf node
+	    			if( map[nodeId] != undefined && map[nodeId].children == undefined ){
+	    				map[nodeId].checked( checked );
+	    			}
+	    			return true;
+	        	},
+	        	add: function( leafNode ){
+	        		if( leafNode ){
+	        			var map = mapUtil.map_;
+	        			var id = leafNode.id;
+	        			map[ id ] = leafNode;
+
+	        			var parents = leafNode[PARENTS_KEY];
+	        			ko.utils.arrayForEach( parents, function(id){
+	        				if( undefined == map[id] ){
+	        					map[id] = [];
+	        				}
+	    					map[id].push( leafNode ); 
+	        			} );
+	        		}
+	        	},
+	        	map: function( node ){
+	        		if( node != undefined ){
+	        			var nodeId = node.id;
+	        			var selected = false;
+	        			if( node.checkedStatus() == 'partial' || node.checkedStatus() == 'none' )
+	        				selected = true;
+	        			else
+	        				selected = false;
+	        			var map = mapUtil.map_;
+	        			if( map[nodeId] ){ 
+		        			ko.utils.arrayForEach( map[nodeId], function(leafNode){
+		        				leafNode.checked(selected);
+		        			});
+	        			}
+	        		}
+	        	},
+	        	clear: function(){
+	        		mapUtil.map_ = {};
+	        	}
+	        };
+
+	        var totalInitedDelayProxy = function(){
+	        	var initedFN = [];
+	        	return {
+	        		delay: function(fn, ownerNodeId){
+	        			fn["ownerNodeId"] = ownerNodeId;
+	        			initedFN.push(fn);
+	        		},
+	        		fire: function(){
+	        			var fn, map = {};
+	        			while(fn=initedFN.pop()){
+	        				if(map[fn["ownerNodeId"]] !== 1){
+		        				fn(); 
+		        				map[fn["ownerNodeId"]] = 1;
+		        				console.log(123);
+	        				}
+	        			}
+	        			map = fn = null;
+	        		}
+	        	};
+	        }();
+
+	        var parseNode = function(node, parentNode) {
+	            var children,
+	                child;
+
+	            if (ko.isObservable(node.children)) {
+	                children = node.children();
+	            } else {
+	                children = node.children;
+	            }
+
+	            if (children) {
+	                nodeInstance(node, parentNode);
+	                var len = children.length;
+	                for (var i = 0; i < len; i++) {
+	                    child = children[i];
+	                    extentParentsKey(child,
+	                        arrParents(node[PARENTS_KEY], node.id));
+	                    parseNode(child, node);
+	                }
+	            } else {
+	            	totalInitedDelayProxy.delay(function(){
+		                if (parentNode) {
+			                var childCount = parentNode.children().length;
+		                    parentNode.leafNodeCount(childCount);
+		                } 
+	            	}, parentNode ? parentNode.id : "");
+	                leafInstance(node, parentNode); 
+		            mapUtil.add(node);
+	            }
+	        };        	
+
+	        var genTreeData = function(d){
+		        var roleData = {
+		            "id": ROOT_ID, // Must be equal to {ROOT_ID}
+		            "label": "全选",
+		            "children": d,
+		        };
+		        extentParentsKey(roleData, []);  
+		        parseNode(roleData, null);
+		        return roleData;
+	        }; 
+
+	        var vm = {
+	            roleSetting: genTreeData(treeData),
+	            nodeClick: function(){
+	            	mapUtil.map(this);
+	            }
+	        }; 	 
+        
+	        // Calcing leaf node count.
+	        totalInitedDelayProxy.fire();
+
+	        // Init leaf node status.
+	        ko.utils.arrayForEach(selectedData, function(nodeId){
+	        	mapUtil.checkedLeafNode(nodeId);
+	        });
+
+	        return vm;        	
+        }; 
+        var vm = genVM(r, null);
+        
+        ko.applyBindings(vm, document.getElementById('roleSettingContainer'));
+
+        //console.log(JSON.stringify(roleData));
+    })();
+    </script>
+</body>

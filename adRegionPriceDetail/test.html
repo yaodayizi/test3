@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<head>
+</head>
+<body>
+<script>
+var ca = function(_name){
+	this.name = _name || 'a';
+
+}	
+ca.prototype.showName = function(){
+	console.log( 'base:' + this.name);
+	return 1;
+}
+
+var CB = function(_name){
+	ca.call(this,_name);
+}
+CB.prototype = new ca();
+CB.prototype.constructor = CB;
+CB.prototype.showName = function(){
+	var r = ca.prototype.showName.call(this); 
+	console.log("parent: " + r );
+}
+
+var a = new CB("AAA");
+a.showName();
+</script>
+</body>
+</html>
