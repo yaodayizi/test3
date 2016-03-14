@@ -1497,3 +1497,39 @@ var cityData = {
 };
 
 
+    var testData = [{
+        id: "1",
+        label: "我的广告",
+        children: [{
+            id: '10',
+            label: '我的计划',
+            children: [{
+                id: '101',
+                label: '新建'
+            }, {
+                id: '102',
+                label: '编辑'
+            }]
+        }, {
+            id: '11',
+            label: '我的策略',
+            children: [{
+                id: '111',
+                label: '新建'
+            }]
+        }]
+    }, {
+        id: "2",
+        label: "报表",
+        children: [{
+            id: '20',
+            label: '每日报表',
+            children: [{
+                id: '201',
+                label: '新建'
+            }, {
+                id: '202',
+                label: '编辑'
+            }]
+        }]
+    }];

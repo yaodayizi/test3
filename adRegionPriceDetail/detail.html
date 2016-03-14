@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="/ssp_new/themes/default/css/reset.css" />
-    <link rel="stylesheet" type="text/css" href="/ssp_new4/themes/default/css/pages/adRegionPriceDetail.css" />
+    <link rel="stylesheet" type="text/css" href="http://localhost/ssp_new4/themes/default/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="http://localhost/ssp_new4/themes/default/css/pages/adRegionPriceDetail.css" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style type="text/css">
     .body {
@@ -82,10 +82,10 @@
         width: 80px;
     }
     </style>
-    <script src="http://localhost/ssp_new2/js/libs/knockout-2.2.1.js"></script>
-    <script src="http://localhost/ssp_new2/js/libs/knockout.mapping.min.js"></script>
-    <script src="http://localhost/ssp_new2/assets/c0937cae/jquery.js"></script>
-</head>
+    <script src="http://localhost/ssp_new4/js/libs/knockout-2.2.1.js"></script>
+    <script src="http://localhost/ssp_new4/js/libs/knockout.mapping.min.js"></script>
+	<script type="text/javascript" src="/ssp_new4/assets/945023b5/jquery.js"></script>
+	</head>
 
 <body>
     <script src="city.js"></script>
@@ -106,7 +106,13 @@
  
                     <li>
                         <label>
-                            <input type="checkbox" value="" data-bind="checkedValue:$parent.selectedItems,checked:$parent.selectedItems,value:id"><span data-bind="text:label"></span></label>
+                            <input type="checkbox" value="" data-bind="checkedValue:$parent.selectedItems,checked:$data.isChecked,value:id"><span data-bind="text:label"></span></label>
+			                <ul style="padding-left:20px" data-bind="foreach:children">
+			                    <li>
+			                        <label>
+			                            <input type="checkbox" value="" data-bind="click:$root.itemClick,value:id"><span data-bind="text:label"></span></label>
+			                    </li>
+			                </ul>
                     </li>
                 </ul>
                 <!--/ko-->
@@ -149,36 +155,43 @@
                         item.path = i;
                     }
 
+                    item.selectedState = ko.observable(0);
+
                     if ('children' in item){
                         item.selectedItems = ko.observableArray([]);
-                        item._selectedState = ko.observable(0);
-                        item._isChecked = ko.observable(false);
-                        item.isChecked = ko.computed({
-                        	read:function(){
-                        		return item.selectedItems().length == item.children.length;
-                        	},
+/*	                	item.isChecked = ko.computed({
+	                    	read:function(){
+	                    		return item.selectedItems().length == item.children.length;
+	                    	},
 							write:function(val){
-								if(val && item.selectedItems().length< item.children.length){
-									item.selectedItems([]);
-									for(var i=0;i < item.children.length;i++){
-										item.selectedItems.push(item.children[i].id);
+								if('children' in item){
+									if(val && item.selectedItems().length< item.children.length){
+										item.selectedItems([]);
+										for(var i=0;i < item.children.length;i++){
+											item.selectedItems.push(item.children[i].id);
+										}
+									}
+									else if(!val && item.selectedItems().length>0){
+											item.selectedItems([]);
 									}
 								}
-								else if(!val && item.selectedItems().length>0){
-										item.selectedItems([]);
+								else
+								{
+									item.
 								}
 							}
-                        });
-                        item.clickNode = function(){
+	                    });*/
 
-                        }
 
                         self.setVm(item.children, item, setFunc);
 
                     } else {
                         //item.path+=',';//叶节点结束加,防止搜索时15和152混淆
-                        self._vm.mapLeafs.push(item.path);
+                        self._vm.mapLeafs.push(item.path+',');
+
                     }
+
+
 
                     self._vm.mapCodeName[item.id] = {
                         id: item.id,
@@ -187,6 +200,58 @@
                     };
                     i++;
                 });
+
+                self._vm.pathFilter = function(path){
+                	var arr=[];
+                	for(var i=0;i<self._vm.mapLeafs.length;i++){
+                		if(self._vm.mapLeafs[i].indexOf(path)==0){
+                			arr.push(self._vm.mapLeafs[i]);
+                		}
+                	}
+                }
+                self._vm.getItemByPath = function(path){
+
+                }
+                self._vm.getParentByPath = function(path){
+	            	var pathArr = item.path.split(',');
+	            	var root = self._vm.data;
+	            	var parent = root[pathArr[0]];
+	            	pathArr = pathArr.slice(0,pathArr.length-1);
+	            	for(var i=1;i<pathArr.length;i++){
+	            		parent = parent[children][pathArr[i]];
+	            	}
+                }
+
+	            self._vm.itemClick = function(){
+
+	            	if('children' in this){
+
+            			var childrenPath = pathFilter(this.path);
+            			for(var i=0;i<childrenPath.length;i++){
+            				
+            			}
+
+
+	            		if(this.selectedState() == 0 && this.selectedState() ==2 ){
+	            			this.selectedState(1);
+
+	            		}
+	            		else
+	            		{
+	            			this.selectedState(0);
+	            		}
+	            	}else{
+	            		this.selectedState() == 1 ? this.selectedState(0) : this.selectedState(1);
+	            	}
+
+	            	self._vm.itemChange(this);
+	            }
+
+	            
+	            self._vm.itemChange = function(item){
+
+	            	//todo检测已选是否等于长度
+	            }
 
 
 
@@ -216,7 +281,7 @@
         }
 
         var tree = new _xtree();
-        var cityVm = tree.init(cityData.data.helper, []);
+        var cityVm = tree.init(testData, []);
         console.log('cityData', cityVm);
         ko.applyBindings(cityVm);
     })();
