@@ -16,9 +16,20 @@ ca.prototype.showName = function(){
 var CB = function(_name){
 	ca.call(this,_name);
 }
+
+/*
+ var _this = this;
+ super = function( a, b ,c ){
+	base.prototype.showName.call( _this, a, b, c);
+	..balabala...
+	base = null;
+ }
+
+ */
 CB.prototype = new ca();
 CB.prototype.constructor = CB;
 CB.prototype.showName = function(){
+	this.base();
 	var r = ca.prototype.showName.call(this); 
 	console.log("parent: " + r );
 }
@@ -26,5 +37,12 @@ CB.prototype.showName = function(){
 var a = new CB("AAA");
 a.showName();
 </script>
+    <script src="http://localhost/ssp_new4/js/libs/knockout-2.2.1.js"></script>
+    <script src="http://localhost/ssp_new4/js/libs/knockout.mapping.min.js"></script>
+    <ul>
+		<li>
+			
+		</li>
+    </ul>
 </body>
 </html>

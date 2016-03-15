@@ -50,8 +50,8 @@
     }
     
     .region-items {
-        /* 		overflow: hidden;
-	 */
+        /*      overflow: hidden;
+     */
     }
     
     .region-items > li {
@@ -81,11 +81,35 @@
         padding: 2px 2px;
         width: 80px;
     }
+    
+    #cityContainer .chk-select {
+        width: 13px;
+        height: 13px;
+        display: inline-block;
+        background: url(images/chk_select.png) no-repeat;
+        cursor: pointer;
+    }
+    
+    #cityContainer .chk-half {
+        width: 13px;
+        height: 13px;
+        display: inline-block;
+        background: url(images/chk_half.png);
+        cursor: pointer;
+    }
+    
+    #cityContainer .chk-not {
+        width: 13px;
+        height: 13px;
+        display: inline-block;
+        background: url(images/chk_not.png);
+        cursor: pointer;
+    }
     </style>
     <script src="http://localhost/ssp_new4/js/libs/knockout-2.2.1.js"></script>
     <script src="http://localhost/ssp_new4/js/libs/knockout.mapping.min.js"></script>
-	<script type="text/javascript" src="/ssp_new4/assets/945023b5/jquery.js"></script>
-	</head>
+    <script type="text/javascript" src="/ssp_new4/assets/945023b5/jquery.js"></script>
+</head>
 
 <body>
     <script src="city.js"></script>
@@ -93,26 +117,24 @@
         <ul data-bind="foreach:$data.data">
             <li>
                 <label>
-                    <input type="checkbox" value="value" data-bind="checked:$data.isChecked"><span data-bind="text:label"></span></label>
-               	 <!--ko if:$data.children-->	
-               	 <li class="select-all">
-                        <label>
-                            <input type="checkbox"  data-bind="checked:$data.isChecked"><span>全选</span>
-                        </label>
-                        <a href="javascript:(0)" data-bind="click:close">关闭</a>
-                	</li>
-               
+                    <i data-bind="css:$root.getStateName(selectedState()),click:$root.itemClick" ></i> <span data-bind="text:label"></span></label>
+                <!--ko if:$data.children-->
+                <li class="select-all">
+                    <label>
+                        <i data-bind="css:$root.getStateName(selectedState()),click:$root.itemClick" ></i><span>全选</span>
+                    </label>
+                    <a href="javascript:(0)" data-bind="click:close">关闭</a>
+                </li>
                 <ul style="padding-left:20px" data-bind="foreach:children">
- 
                     <li>
                         <label>
-                            <input type="checkbox" value="" data-bind="checkedValue:$parent.selectedItems,checked:$data.isChecked,value:id"><span data-bind="text:label"></span></label>
-			                <ul style="padding-left:20px" data-bind="foreach:children">
-			                    <li>
-			                        <label>
-			                            <input type="checkbox" value="" data-bind="click:$root.itemClick,value:id"><span data-bind="text:label"></span></label>
-			                    </li>
-			                </ul>
+                            <i data-bind="css:$root.getStateName(selectedState()),click:$root.itemClick" ></i> <span data-bind="text:label"></span></label>
+                            <ul style="padding-left:20px" data-bind="foreach:children">
+                                <li>
+                                    <label>
+                                       <i data-bind="css:$root.getStateName(selectedState()),click:$root.itemClick" ></i> <span data-bind="text:label"></span></label>
+                                </li>
+                            </ul>
                     </li>
                 </ul>
                 <!--/ko-->
@@ -126,7 +148,7 @@
             this._vm = {
                 mapLeafs: [],
                 mapCodeTree: {},
-                mapCodeName: {}
+                mapIDName: {}
             };
         }
         _xtree.prototype = {
@@ -135,7 +157,7 @@
                 return this.setVm(this._vm.data, null);
             },
             /** [setVm description]
-             *  setFunc(data,isChild)	
+             *  setFunc(data,isChild)   
              */
             setVm: function(data, parent, setFunc) {
                 var self = this;
@@ -146,54 +168,29 @@
                     if (parent) {
                         item.parentIndex = parent.index;
                         item.path = parent.path + ',' + i;
-                        /*						if(!self._vm.mapCodeTree[parent.id])
-                        						{
-                        							self._vm.mapCodeTree[parent.id]=[];
-                        						}
-                        						self._vm.mapCodeTree[parent.id].push(item.id);*/
+                        /*                      if(!self._vm.mapCodeTree[parent.id])
+                                                {
+                                                    self._vm.mapCodeTree[parent.id]=[];
+                                                }
+                                                self._vm.mapCodeTree[parent.id].push(item.id);*/
                     } else {
                         item.path = i;
                     }
+                    //console.log(item.path);
 
                     item.selectedState = ko.observable(0);
 
-                    if ('children' in item){
+                    if ('children' in item) {
                         item.selectedItems = ko.observableArray([]);
-/*	                	item.isChecked = ko.computed({
-	                    	read:function(){
-	                    		return item.selectedItems().length == item.children.length;
-	                    	},
-							write:function(val){
-								if('children' in item){
-									if(val && item.selectedItems().length< item.children.length){
-										item.selectedItems([]);
-										for(var i=0;i < item.children.length;i++){
-											item.selectedItems.push(item.children[i].id);
-										}
-									}
-									else if(!val && item.selectedItems().length>0){
-											item.selectedItems([]);
-									}
-								}
-								else
-								{
-									item.
-								}
-							}
-	                    });*/
-
-
                         self.setVm(item.children, item, setFunc);
 
                     } else {
                         //item.path+=',';//叶节点结束加,防止搜索时15和152混淆
-                        self._vm.mapLeafs.push(item.path+',');
+                        self._vm.mapLeafs.push(item.path + ',');
 
                     }
 
-
-
-                    self._vm.mapCodeName[item.id] = {
+                    self._vm.mapIDName[item.id] = {
                         id: item.id,
                         label: item.label,
                         path: item.path
@@ -201,76 +198,141 @@
                     i++;
                 });
 
-                self._vm.pathFilter = function(path){
-                	var arr=[];
-                	for(var i=0;i<self._vm.mapLeafs.length;i++){
-                		if(self._vm.mapLeafs[i].indexOf(path)==0){
-                			arr.push(self._vm.mapLeafs[i]);
-                		}
-                	}
-                }
-                self._vm.getItemByPath = function(path){
-
-                }
-                self._vm.getParentByPath = function(path){
-	            	var pathArr = item.path.split(',');
-	            	var root = self._vm.data;
-	            	var parent = root[pathArr[0]];
-	            	pathArr = pathArr.slice(0,pathArr.length-1);
-	            	for(var i=1;i<pathArr.length;i++){
-	            		parent = parent[children][pathArr[i]];
-	            	}
+                self._vm.pathFilter = function(path) {
+                    var arr = [];
+                    for (var i = 0; i < self._vm.mapLeafs.length; i++) {
+                        if (self._vm.mapLeafs[i].indexOf(path) == 0) {
+                            arr.push(self._vm.mapLeafs[i]);
+                        }
+                    }
+                    return arr;
                 }
 
-	            self._vm.itemClick = function(){
+                self._vm.getItemByPath = function(path) {
+                    if(path=="") return null;
+                    var item = self._vm.data;
+                    var pathArr = self._vm.getPathArr(path);
+                    var item = item[pathArr[0]];
+                    for (var i = 1; i < pathArr.length; i++) {
+                        item = item['children'][pathArr[i]];
+                    }
+                    return item;
+                }
+                self._vm.getPathArr = function(path) {
+                    path = String(path);
+                    if (path.substr(path.length - 1, path.length) == ',')
+                        path = path.substr(0, path.length - 1);
+                    return path.split(',');
+                }
 
-	            	if('children' in this){
+                self._vm.getParentByPath = function(path) {
+                    var pathArr = self._vm.getPathArr(path);
+                    pathArr = pathArr.slice(0, pathArr.length - 1);
+                    return self._vm.getItemByPath(pathArr.join(','));
+                }
 
-            			var childrenPath = pathFilter(this.path);
-            			for(var i=0;i<childrenPath.length;i++){
-            				
-            			}
+                self._vm.itemClick = function() {
 
+                    if ('children' in this) {
 
-	            		if(this.selectedState() == 0 && this.selectedState() ==2 ){
-	            			this.selectedState(1);
+                        if (this.selectedState() == 0 || this.selectedState() == 2) {
+                            this.selectedState(1);
+                        } else {
+                            this.selectedState(0);
+                        }
+                    } else {
+                        this.selectedState() == 1 ? this.selectedState(0) : this.selectedState(1);
+                    }
+                    self._vm.itemChange(this);
+                }
 
-	            		}
-	            		else
-	            		{
-	            			this.selectedState(0);
-	            		}
-	            	}else{
-	            		this.selectedState() == 1 ? this.selectedState(0) : this.selectedState(1);
-	            	}
+                self._vm.selctedAllChildren = function(item,state) {
+                    var childrenLeafPath = self._vm.pathFilter(item.path + ',');
+                    for (var i = 0; i < childrenLeafPath.length; i++) {
+                        var item = self._vm.getItemByPath(childrenLeafPath[i]);
+                        item.selectedState(state);
+                        var parent = self._vm.getParentByPath(childrenLeafPath[i]);
+                        //parent.selectedItems.push(item.id);
+                        self._vm.itemParentStateCheck(parent, state, item.id);
 
-	            	self._vm.itemChange(this);
-	            }
+                    }
+                }
 
-	            
-	            self._vm.itemChange = function(item){
+                self._vm.itemChange = function(item) {
+                     var parent = self._vm.getParentByPath(item.path);
+                    if (item.selectedState() == 1) {
+                        if('children' in item)
+                        {
+                            self._vm.selctedAllChildren(item,1);
+                            
+                        }
+                        else{
+                            self._vm.itemParentStateCheck(parent, 1, item.id);
+                        }
+                    } else {
+                        self._vm.selctedAllChildren(item,0);
+                    }
 
-	            	//todo检测已选是否等于长度
-	            }
+                }
 
+                self._vm.itemParentStateCheck = function(item, state, id) {
+                    if(!item) return;
+                    if (state ==1) {
+                        item.selectedItems.push(id);
+                    } else if(state == 0 || state==2) {
+                        item.selectedItems.remove(id);
+                    }
+                    var parent = self._vm.getParentByPath(item.path);
+                    if (item.selectedItems().length == item['children'].length) {
+                        item.selectedState(1);
+                        self._vm.itemParentStateCheck(parent, 1, item.id);
+                    } else if (item.selectedItems().length > 0) {
+                        item.selectedState(2);
+                        self._vm.itemParentStateCheck(parent, 0, item.id);
+                    } else {
+                        item.selectedState(0);
+                        self._vm.itemParentStateCheck(parent, 0, item.id);
+                    }
 
+                }
 
-                this._vm.getSelectItems = function(data) {
-                    /*				var selectedItems = [];
-                    				ko.utils.arrayForEach(data,(function(self){
-                    					return function(item){
-                    						if('selectedItems' in item){
-                    							selectedItems.push(item.selectedItems());
-                    						}else if(item.level==1){
-                    							setSelectItems.push(item.code);
-                    						}
-                    					}
-                    				})(data));
-                    				return selectedItems;*/
+                self._vm.getSelectItems = function(data) {
+                    var selectedItems = [];
+                    for (var i = 0; i < data.length; i++) {
+                        if ('selectedItems' in data[i]) {
+                            selectItems = selectedItems.contact(data[i].selectedItems);
+                            return getSelectItems(data[i]);
+                        } else if ('level' == 1) { //顶级叶节点父对象没有selectedItems
+                            selectItems.push(data[i].id);
+                        }
+                    }
+                    return selectedItems;
                 };
 
-                this._vm.getShowSelectItems = function() {
+                self._vm.setSelectItems = function(idArr) {
+                    for (var i = 0; i < idArr.length; i++) {
+                        var obj = self._vm.mapIDName[idArr[i]];
+                        var item = self._vm.getItemByPath(obj.path);
+                        item.selectedState(1);
+                        var parent = self._vm.getParentByPath(obj.path);
+                        self._vm.itemParentStateCheck(parent, 1, item.id);
+                    }
+                }
 
+                self._vm.getStateName = function(state) {
+                    var css;
+                    switch (state) {
+                        case 0:
+                            css = 'chk-not';
+                            break;
+                        case 1:
+                            css = 'chk-select';
+                            break;
+                        case 2:
+                            css = 'chk-half';
+                            break;
+                    }
+                    return css;
                 }
 
                 data.setSelectItems = function() {}
