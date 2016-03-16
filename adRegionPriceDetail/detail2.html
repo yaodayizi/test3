@@ -117,24 +117,26 @@
         <ul data-bind="foreach:$data.data">
             <li>
                 <label>
-                    <i data-bind="css:$root.getStateName(selectedState()),click:$root.itemClick" ></i> <span data-bind="text:label"></span></label>
+                    <i data-bind="css:$root.getStateName(selectedState()),click:$root.itemClick"></i> <span data-bind="text:label"></span></label>
                 <!--ko if:$data.children-->
                 <li class="select-all">
                     <label>
-                        <i data-bind="css:$root.getStateName(selectedState()),click:$root.itemClick" ></i><span>全选</span>
+                        <i data-bind="css:$root.getStateName(selectedState()),click:$root.itemClick"></i><span>全选</span>
                     </label>
                     <a href="javascript:(0)" data-bind="click:close">关闭</a>
                 </li>
                 <ul style="padding-left:20px" data-bind="foreach:children">
                     <li>
                         <label>
-                            <i data-bind="css:$root.getStateName(selectedState()),click:$root.itemClick" ></i> <span data-bind="text:label"></span></label>
-                            <ul style="padding-left:20px" data-bind="foreach:children">
-                                <li>
-                                    <label>
-                                       <i data-bind="css:$root.getStateName(selectedState()),click:$root.itemClick" ></i> <span data-bind="text:label"></span></label>
-                                </li>
-                            </ul>
+                            <i data-bind="css:$root.getStateName(selectedState()),click:$root.itemClick"></i> <span data-bind="text:label"></span></label>
+                        <!--ko if:$data.children-->
+                        <ul style="padding-left:20px" data-bind="foreach:children">
+                            <li>
+                                <label>
+                                    <i data-bind="css:$root.getStateName(selectedState()),click:$root.itemClick"></i> <span data-bind="text:label"></span></label>
+                            </li>
+                        </ul>
+                        <!--/ko-->
                     </li>
                 </ul>
                 <!--/ko-->
@@ -159,7 +161,7 @@
             /** [setVm description]
              *  setFunc(data,isChild)   
              */
-            setVm: function(data, parent, setFunc) {
+            setVm: function(data, parent) {
                 var self = this;
                 var i = 0;
                 ko.utils.arrayForEach.call(self, data, function(item) {
@@ -168,11 +170,6 @@
                     if (parent) {
                         item.parentIndex = parent.index;
                         item.path = parent.path + ',' + i;
-                        /*                      if(!self._vm.mapCodeTree[parent.id])
-                                                {
-                                                    self._vm.mapCodeTree[parent.id]=[];
-                                                }
-                                                self._vm.mapCodeTree[parent.id].push(item.id);*/
                     } else {
                         item.path = i;
                     }
@@ -182,12 +179,11 @@
 
                     if ('children' in item) {
                         item.selectedItems = ko.observableArray([]);
-                        self.setVm(item.children, item, setFunc);
+                        self.setVm(item.children, item);
 
                     } else {
                         //item.path+=',';//叶节点结束加,防止搜索时15和152混淆
                         self._vm.mapLeafs.push(item.path + ',');
-
                     }
 
                     self._vm.mapIDName[item.id] = {
@@ -209,7 +205,7 @@
                 }
 
                 self._vm.getItemByPath = function(path) {
-                    if(path=="") return null;
+                    if (path == "") return null;
                     var item = self._vm.data;
                     var pathArr = self._vm.getPathArr(path);
                     var item = item[pathArr[0]];
@@ -232,90 +228,112 @@
                 }
 
                 self._vm.itemClick = function() {
+                    var parent = self._vm.getParentByPath(this.path);
 
-                    if ('children' in this) {
-
-                        if (this.selectedState() == 0 || this.selectedState() == 2) {
-                            this.selectedState(1);
-                        } else {
-                            this.selectedState(0);
-                        }
+                    if (this.selectedState() == 0 || this.selectedState() == 2) {
+                        this.selectedState(1);
+                        if (parent && parent.selectedItems.indexOf(this.id) < 0)
+                            parent.selectedItems.push(this.id);
                     } else {
-                        this.selectedState() == 1 ? this.selectedState(0) : this.selectedState(1);
+                        this.selectedState(0);
+                        if (parent)
+                            parent.selectedItems.remove(this.id);
                     }
+
                     self._vm.itemChange(this);
                 }
 
-                self._vm.selctedAllChildren = function(item,state) {
+
+
+                self._vm.itemChange = function(item) {
+                    var parent = self._vm.getParentByPath(item.path);
+                    if (item.selectedState() == 1) {
+                        if ('children' in item) {
+                            self._vm.selctedAllChildren(item, 1);
+
+                        } else {
+                            if (parent) {
+                                self._vm.itemParentStateCheck(parent, 1, item.id, parent.children.length, parent.selectedItems().length);
+                            }
+                        }
+                    } else {
+                        self._vm.selctedAllChildren(item, 0);
+                    }
+
+                }
+
+                self._vm.selctedAllChildren = function(item, state) {
                     var childrenLeafPath = self._vm.pathFilter(item.path + ',');
                     for (var i = 0; i < childrenLeafPath.length; i++) {
                         var item = self._vm.getItemByPath(childrenLeafPath[i]);
                         item.selectedState(state);
+
                         var parent = self._vm.getParentByPath(childrenLeafPath[i]);
-                        //parent.selectedItems.push(item.id);
-                        self._vm.itemParentStateCheck(parent, state, item.id);
-
+                        if (state == 1)
+                            parent.selectedItems.push(item.id);
+                        else
+                            parent.selectedItems.remove(item.id);
+                        self._vm.itemParentStateCheck(parent, state, item.id, parent.children.length, parent.selectedItems().length);
                     }
                 }
 
-                self._vm.itemChange = function(item) {
-                     var parent = self._vm.getParentByPath(item.path);
-                    if (item.selectedState() == 1) {
-                        if('children' in item)
-                        {
-                            self._vm.selctedAllChildren(item,1);
-                            
-                        }
-                        else{
-                            self._vm.itemParentStateCheck(parent, 1, item.id);
-                        }
-                    } else {
-                        self._vm.selctedAllChildren(item,0);
-                    }
 
-                }
+                self._vm.itemParentStateCheck = function(item, state, id, count, selectedCount) {
+                    if (!item) return;
+                    item.count = count;
+                    item.selectedCount = selectedCount;
 
-                self._vm.itemParentStateCheck = function(item, state, id) {
-                    if(!item) return;
-                    if (state ==1) {
-                        item.selectedItems.push(id);
-                    } else if(state == 0 || state==2) {
-                        item.selectedItems.remove(id);
-                    }
+                    //console.log(item,count,selectedCount);
                     var parent = self._vm.getParentByPath(item.path);
-                    if (item.selectedItems().length == item['children'].length) {
+                    if (parent) {
+                        for (var i = 0; i < parent.children.length; i++) {
+
+                            var sibling = parent.children[i];
+                            if ('children' in sibling) {
+                                count += sibling.children.length;
+                                selectedCount += sibling.selectedItems().length;
+                            }
+                        }
+                        //console.log(parent,count,selectedCount);
+                    }
+
+                    if (item.count > 0 && item.count <= item.selectedCount) {
                         item.selectedState(1);
-                        self._vm.itemParentStateCheck(parent, 1, item.id);
-                    } else if (item.selectedItems().length > 0) {
+                        self._vm.itemParentStateCheck(parent, 1, item.id, count, selectedCount);
+                    } else if (item.selectedCount > 0) {
                         item.selectedState(2);
-                        self._vm.itemParentStateCheck(parent, 0, item.id);
+                        self._vm.itemParentStateCheck(parent, 0, item.id, count, selectedCount);
                     } else {
                         item.selectedState(0);
-                        self._vm.itemParentStateCheck(parent, 0, item.id);
+                        self._vm.itemParentStateCheck(parent, 0, item.id, count, selectedCount);
                     }
-
                 }
 
-                self._vm.getSelectItems = function(data) {
+                self._vm.getSelectedItems = function(data) {
+                    var data = data || self._vm.data;
                     var selectedItems = [];
+
                     for (var i = 0; i < data.length; i++) {
-                        if ('selectedItems' in data[i]) {
-                            selectItems = selectedItems.contact(data[i].selectedItems);
-                            return getSelectItems(data[i]);
+                        if ('children' in data[i]) {
+                            console.log(data[i], data[i].selectedItems());
+                            selectedItems = selectedItems.concat(data[i].selectedItems());
+                            //var tmpSelectedItems = self._vm.getSelectedItems(data[i].children) ;
+                            selectedItems = selectedItems.concat(self._vm.getSelectedItems(data[i].children));
                         } else if ('level' == 1) { //顶级叶节点父对象没有selectedItems
-                            selectItems.push(data[i].id);
+                            selectedItems.push(data[i].id);
                         }
                     }
                     return selectedItems;
                 };
 
-                self._vm.setSelectItems = function(idArr) {
+                self._vm.setSelectedItems = function(idArr) {
                     for (var i = 0; i < idArr.length; i++) {
                         var obj = self._vm.mapIDName[idArr[i]];
                         var item = self._vm.getItemByPath(obj.path);
                         item.selectedState(1);
                         var parent = self._vm.getParentByPath(obj.path);
-                        self._vm.itemParentStateCheck(parent, 1, item.id);
+                        parent.selectedItems.push(item.id);
+                        self._vm.itemParentStateCheck(parent, 1, item.id, parent.children.length, parent.selectedItems().length);
                     }
                 }
 
@@ -335,15 +353,13 @@
                     return css;
                 }
 
-                data.setSelectItems = function() {}
-
                 return this._vm;
             }
 
         }
 
         var tree = new _xtree();
-        var cityVm = tree.init(testData, []);
+        var cityVm = tree.init(cityData.data.helper);
         console.log('cityData', cityVm);
         ko.applyBindings(cityVm);
     })();
