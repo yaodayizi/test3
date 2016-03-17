@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+    <script src="http://localhost/ssp_new4/js/libs/knockout-2.2.1.js"></script>
+    <script src="http://localhost/ssp_new4/js/libs/knockout.mapping.min.js"></script>
+    <script type="text/javascript" src="/ssp_new4/assets/945023b5/jquery.js"></script>
+    <script src="json2.js"></script>
+    <style>
+    i {
+        height: 30px;
+        display: inline-block;
+        width: 30px;
+        background: green;
+    }
+    
+    i.selected {
+        background: red;
+    }
+    </style>
+    <div>
+        <div id="navs" data-bind="template:{name:'navTemplate',foreach:$data}">
+        </div>
+        <input type="button" value="确定" >
+        </button>
+        <input type="button" value="重置">
+        </button>
+    </div>
+    <script type="text/html" id="navTemplate">
+        <div>
+            <div data-bind="text:name"></div>
+            <ul data-bind="attr:{'data-type':type}">
+                <li data-bind="click:$root.setSelectedAll.bind($data,$data.type)"><i></i><span>全选</span></li>
+                <!--ko foreach:values-->
+                <li data-bind="click:$root.itemClick.bind($data,$parent)"><i data-bind="css:{selected:selected()}"></i><span data-bind="text:name"></span></li>
+                <!--/ko-->
+            </ul>
+        </div>
+    </script>
+    <script>
+    var navModel = (function() {
+    	var data;
+    	var filter = {};
+        return {
+            init: function(navData) {
+            	data = navData;
+                $.each(navData, function(navData) {
+                    var item = this;
+                    $.each(item.values, function() {
+                        this.selected = ko.observable(false);
+                    });
+                });
+
+                navData.itemClick = function(parent) {
+                    var selected;
+                    if (this.selected()) {
+                        selected = false;
+                    } else {
+                        selected = true;
+                    }
+                    this.selected(selected);
+
+                    var selectItem = [];
+
+                    $.each(parent.values, function() {
+                        if (this.selected()) selectItem.push(this.id);
+                    });
+
+                    if (selectItem.length == parent.values.length) {
+                        navData.setSelectedAll(parent.type, true);
+                    } else {
+                        navData.setSelectedAll(parent.type, false);
+                    }
+                };
+
+                navData.setSelectedAll = function(type, bool) {
+                    if (bool) {
+                        $('#navs [data-type=' + type + '] li i').removeClass('selected').eq(0).addClass('selected');
+                    } else {
+                        $('#navs [data-type=' + type + '] li i').eq(0).removeClass('selected');
+                    }
+                }
+
+
+                console.log(navData);
+                ko.applyBindings(navData, document.getElementById('navs'));
+
+            },
+            getSelectedItems:function(){
+                $.each(data, function(navData) {
+                    var item = this;
+                    filter[item.type]=[];
+                    $.each(item.values, function() {
+                    	if(this.selected()) filter[item.type].push(this.id);
+                    });
+                });
+                return filter;
+            }
+
+
+
+        }
+
+    })();
+
+
+
+    navModel.init(data.navs)
+    </script>
+</body>
+
+</html>
